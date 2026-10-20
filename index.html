@@ -14,7 +14,7 @@
 button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}
 .hidden{display:none!important}
 header{background:linear-gradient(130deg,var(--navy),var(--navy2));color:white;padding:16px max(16px,calc((100vw - 1180px)/2));position:sticky;top:0;z-index:5;box-shadow:0 8px 28px #101c2c20}
-.top{display:flex;align-items:center;gap:14px;max-width:1180px;margin:auto}.brand{display:flex;align-items:center;gap:11px;min-width:0}.logo{width:48px;height:48px;border-radius:13px;object-fit:contain;background:white;padding:4px;display:none}.logo-fallback{width:48px;height:48px;border:1px solid #ffffff55;border-radius:13px;display:grid;place-items:center;font-weight:900;letter-spacing:1px;color:var(--accent);font-size:18px;flex-shrink:0}.brand h1{font-size:19px;margin:0;letter-spacing:.4px}.brand p{margin:4px 0 0;color:#c4cedb;font-size:11px}.top-spacer{flex:1}.header-btn{border:1px solid #ffffff40;background:#ffffff10;color:white;border-radius:12px;padding:10px 13px;font-size:13px;white-space:nowrap}
+.top{display:flex;align-items:center;gap:14px;max-width:1180px;margin:auto}.brand{display:flex;align-items:center;gap:11px;min-width:0}.logo{width:48px;height:48px;border-radius:13px;object-fit:contain;background:white;padding:4px;display:none}.logo-fallback{width:48px;height:48px;border:1px solid #ffffff55;border-radius:13px;display:grid;place-items:center;font-weight:900;letter-spacing:1px;color:var(--accent);font-size:18px;flex-shrink:0}.brand h1{font-size:19px;margin:0;letter-spacing:.4px}.brand p{margin:4px 0 0;color:#c4cedb;font-size:11px}.top-spacer{flex:1}.theme-btn{width:38px;height:38px;display:grid;place-items:center;border:1px solid #ffffff40;background:#ffffff12;color:white;border-radius:12px;font-size:18px;flex-shrink:0}.header-btn{border:1px solid #ffffff40;background:#ffffff10;color:white;border-radius:12px;padding:10px 13px;font-size:13px;white-space:nowrap}
 main{max-width:1180px;margin:auto;padding:24px 18px 70px}.hero{border-radius:24px;background:linear-gradient(120deg,#16263a,#243c56);color:white;padding:clamp(22px,5vw,46px);display:grid;grid-template-columns:1.3fr .7fr;gap:22px;align-items:center;overflow:hidden;position:relative}.hero:after{content:"KTV";font-size:clamp(90px,18vw,210px);font-weight:900;color:#ffffff08;position:absolute;left:0;bottom:-45px;letter-spacing:-8px}.eyebrow{color:var(--accent);font-size:12px;font-weight:bold;letter-spacing:1px}.hero h2{font-size:clamp(25px,4vw,40px);line-height:1.5;margin:10px 0}.hero p{color:#d1dae5;line-height:2;margin:0;max-width:580px;font-size:14px}.hero-art{height:150px;display:grid;place-items:center;font-size:76px;opacity:.92;position:relative;z-index:1}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.primary,.secondary,.outline{border:0;border-radius:12px;padding:12px 17px;font-weight:bold;font-size:13px}.primary{background:var(--accent);color:#1a2635}.secondary{background:white;color:var(--navy)}.outline{background:transparent;border:1px solid var(--line);color:var(--ink)}
 .section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:30px 0 16px}.section-head h2{margin:0;font-size:21px}.section-head p{margin:6px 0 0;color:var(--muted);font-size:12px}.tools{display:flex;gap:9px;align-items:center}.search{width:min(280px,45vw);border:1px solid var(--line);background:white;border-radius:12px;padding:11px 13px;outline:none}.search:focus,input:focus,textarea:focus{border-color:#d9a13c;box-shadow:0 0 0 3px #e6a83b20}
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.product{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:transform .18s,box-shadow .18s;min-width:0}.product:hover{transform:translateY(-3px);box-shadow:0 12px 28px #15263b12}.product-photo{width:100%;aspect-ratio:1.25;background:#e9edf2;display:grid;place-items:center;overflow:hidden}.product-photo img{width:100%;height:100%;object-fit:cover}.placeholder{font-size:44px;color:#a8b2bf}.product-body{padding:15px}.product-tag{font-size:10px;color:#986718;background:#fff4dc;padding:5px 8px;border-radius:20px;display:inline-block}.product h3{font-size:15px;margin:11px 0 7px;line-height:1.7;overflow-wrap:anywhere}.product .summary{color:var(--muted);font-size:12px;line-height:1.8;min-height:42px;white-space:pre-wrap;overflow-wrap:anywhere}.product-bottom{display:flex;gap:8px;margin-top:14px}.product-bottom button{flex:1;padding:10px 6px;font-size:12px}.info-btn{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:10px;font-weight:bold}.empty{background:white;border:1px dashed #cbd3de;border-radius:18px;padding:42px 18px;text-align:center;color:var(--muted);grid-column:1/-1;line-height:2}
@@ -37,6 +37,35 @@ footer{background:var(--navy);color:#d0d8e2;padding:25px 18px;text-align:center;
 .logo-fallback,.logo{cursor:pointer}
 @media(max-width:520px){.detail-grid{grid-template-columns:1fr}.product-detail-modal{padding:15px}.product-detail-modal>img{max-height:240px}}
 .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#122238;color:white;border-radius:12px;padding:12px 18px;z-index:30;font-size:13px;box-shadow:0 8px 25px #0002;max-width:90vw}
+
+/* KTV homepage slider */
+.hero{min-height:300px;grid-template-columns:1fr;position:relative;padding:0;display:block}.hero:after{display:none}
+.hero-slide{min-height:300px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:24px;padding:clamp(24px,5vw,46px);position:relative;isolation:isolate}
+.hero-slide::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#101f31f5 0%,#1d3a57d9 58%,#172b40a8 100%);z-index:-1}
+.hero-slide-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2}
+.hero-slide h2{font-size:clamp(25px,4vw,40px);line-height:1.5;margin:10px 0;color:#fff}
+.hero-slide p{color:#e0e7ef;line-height:2;margin:0;max-width:580px;font-size:14px;white-space:pre-line}
+.hero-slide .hero-art{font-size:76px}
+.hero-dots{position:absolute;bottom:15px;left:0;right:0;display:flex;justify-content:center;gap:7px;z-index:2}
+.hero-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#ffffff80}
+.hero-dot.active{width:23px;border-radius:8px;background:var(--accent)}
+.hero-arrow{position:absolute;top:50%;transform:translateY(-50%);z-index:3;border:1px solid #ffffff50;background:#07132177;color:white;width:34px;height:34px;border-radius:50%;font-size:18px}
+.hero-prev{right:12px}.hero-next{left:12px}
+.slide-admin-item{display:grid;grid-template-columns:64px 1fr auto;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:12px}
+.slide-admin-item img{width:64px;height:48px;object-fit:cover;border-radius:8px;background:#e9edf2}
+.slide-admin-item .slide-title{font-size:13px;font-weight:bold}
+.slide-admin-item small{color:var(--muted)}
+body[data-theme="dark"]{--bg:#0c1119;--card:#151d29;--ink:#e8edf4;--muted:#aab6c6;--line:#2a3545;background:var(--bg);color:var(--ink);color-scheme:dark}
+body[data-theme="dark"] .about,body[data-theme="dark"] .admin,body[data-theme="dark"] .product,body[data-theme="dark"] .detail-box,body[data-theme="dark"] .modal-card{background:#151d29;color:var(--ink);border-color:var(--line)}
+body[data-theme="dark"] .field input,body[data-theme="dark"] .field textarea,body[data-theme="dark"] .search{background:#0f1722;color:var(--ink);border-color:var(--line)}
+body[data-theme="dark"] .admin-bar{background:#101823;border-color:var(--line);color:var(--muted)}
+body[data-theme="dark"] .admin-bar b,body[data-theme="dark"] .about h2,body[data-theme="dark"] .section-head h2,body[data-theme="dark"] .product h3{color:var(--ink)}
+body[data-theme="dark"] .about p,body[data-theme="dark"] .product .summary{color:var(--muted)}
+body[data-theme="dark"] .outline{background:#172130;color:var(--ink);border-color:var(--line)}
+body[data-theme="dark"] footer{background:#080d14;color:#aab6c6}
+body[data-theme="dark"] .product-image,body[data-theme="dark"] .preview{background:#202b3a}
+@media(max-width:620px){.hero-slide{grid-template-columns:1fr;min-height:290px;padding:25px 22px 43px}.hero-slide .hero-art{display:none}.hero-slide h2{font-size:25px}.hero-slide p{font-size:13px}.hero-arrow{top:auto;bottom:10px;transform:none}.hero-prev{right:12px}.hero-next{left:12px}.slide-admin-item{grid-template-columns:54px 1fr}.slide-admin-item img{width:54px}.slide-admin-item .admin-actions{grid-column:1/-1}}
+
 @media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{grid-template-columns:1fr .35fr}.hero-art{font-size:55px}}
 @media(max-width:620px){header{padding:11px 12px}.top{gap:8px}.logo,.logo-fallback{width:41px;height:41px}.brand h1{font-size:16px}.brand p{font-size:10px}.header-btn{padding:9px 10px;font-size:11px}main{padding:14px 12px 45px}.hero{grid-template-columns:1fr;padding:24px 19px;border-radius:19px}.hero-art{display:none}.hero h2{font-size:26px}.hero p{font-size:13px}.hero-actions{margin-top:17px}.section-head{align-items:stretch;flex-direction:column;margin-top:25px}.tools{width:100%}.search{width:100%;flex:1}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-body{padding:11px}.product h3{font-size:13px}.product .summary{font-size:11px;min-height:40px}.product-bottom{gap:6px}.product-bottom button{font-size:11px;padding:10px 3px}.about{grid-template-columns:1fr;gap:15px;padding:20px}.about-logo{width:86px;height:86px}.admin{padding:16px}.admin-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.manage-row{align-items:flex-start;flex-wrap:wrap}.manage-row .danger{padding:8px 7px}}
 @media(max-width:350px){.grid{grid-template-columns:1fr}.brand p{display:none}.header-btn{font-size:10px}}
@@ -92,12 +121,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 <body>
 <header><div class="top">
   <div class="brand"><div class="logo-fallback" id="logoFallback">KTV</div><img class="logo" id="headerLogo" alt="لوگوی شرکت"><div><h1 id="headerName">KTV | قطعات خودرو</h1><p>کاتالوگ محصولات شرکت</p></div></div>
-  <div class="top-spacer"></div><button type="button" class="header-btn" id="btnAbout">درباره ما</button>
+  <div class="top-spacer"></div><button type="button" class="theme-btn" id="themeToggle" aria-label="تغییر حالت روشن و تاریک" title="حالت روشن/تاریک">☾</button><button type="button" class="header-btn" id="btnAbout">درباره ما</button>
 </div></header>
 <main>
-  <section class="hero">
-    <div><div class="eyebrow">KTV · AUTOMOTIVE PARTS</div><h2>قطعه مناسب، انتخاب مطمئن</h2><p>کاتالوگ قطعات خودرو؛ محصولات را ببینید و برای مشاهده مشخصات هر قطعه روی «اطلاعات» بزنید.</p><div class="hero-actions"><button type="button" class="primary" id="btnProducts">مشاهده محصولات ↓</button><button type="button" class="secondary" id="btnAbout2">آشنایی با شرکت</button></div></div>
-    <div class="hero-art" aria-hidden="true">⚙️</div>
+  <section class="hero" id="heroSlider" aria-label="اسلایدر صفحه اصلی">
+    <div class="hero-slide">
+      <div><div class="eyebrow">KTV · AUTOMOTIVE PARTS</div><h2>قطعه مناسب، انتخاب مطمئن</h2><p>کاتالوگ قطعات خودرو؛ محصولات را ببینید و برای مشاهده مشخصات هر قطعه روی «اطلاعات» بزنید.</p><div class="hero-actions"><button type="button" class="primary" id="btnProducts">مشاهده محصولات ↓</button><button type="button" class="secondary" id="btnAbout2">آشنایی با شرکت</button></div></div>
+      <div class="hero-art" aria-hidden="true">⚙️</div>
+    </div>
   </section>
   <section id="productsSection">
     <div class="section-head"><div><h2>محصولات ما</h2><p>برای دیدن مشخصات هر محصول، بخش اطلاعات را باز کنید.</p></div><div class="tools"><input class="search" id="search" type="search" placeholder="جستجوی نام قطعه..." autocomplete="off"></div></div>
@@ -134,12 +165,24 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
         <div class="field"><label for="productName">نام محصول *</label><input id="productName" maxlength="200" placeholder="مثلاً فیلتر هوا"></div>
         <div class="field"><label for="productCategory">دسته‌بندی (اختیاری)</label><input id="productCategory" maxlength="100" placeholder="مثلاً سیستم موتور"></div>
         <div class="field"><label for="productGroup">گروه محصول</label><input id="productGroup" maxlength="150" placeholder="مثلاً سیستم تعلیق و جلوبندی"></div>
+        <div class="field"><label for="productManufacturer">سازنده</label><input id="productManufacturer" maxlength="180" placeholder="مثلاً شرکت KTV یا برند سازنده"></div>
         <div class="field full"><label for="suitableCars">مناسب برای چه خودروهایی؟</label><textarea id="suitableCars" maxlength="2000" placeholder="مثلاً پژو ۲۰۶، ۲۰۷ و رانا؛ هر خودرو را در یک خط وارد کنید."></textarea></div>
         <div class="field full"><label for="productInfo">توضیحات و مشخصات محصول</label><textarea id="productInfo" maxlength="5000" placeholder="توضیحات محصول، شماره فنی، جنس، ویژگی‌ها و نکات نصب..."></textarea></div><div class="field full"><div class="square-editor-tools"><button type="button" id="insertSquareBtn">□ افزودن مربع به ابتدای خط</button><button type="button" id="insertSquareNewLineBtn">□ افزودن خط جدید با مربع</button></div><small style="color:var(--muted);line-height:1.8">برای مرتب‌کردن مشخصات، نشانگر را روی خط دلخواه بگذار و دکمه را بزن.</small></div>
       </div>
       <div class="admin-actions"><button type="button" class="primary" id="saveProductBtn">ذخیره محصول</button><button type="button" class="outline" id="resetProductBtn">پاک کردن فرم</button></div>
       <div id="manageList" class="manage-list"></div>
 
+      <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+      <h3 style="font-size:16px;margin-bottom:8px">مدیریت اسلایدر صفحه اصلی</h3>
+      <p style="font-size:12px;color:var(--muted);line-height:1.9;margin-top:0">عکس و نوشته‌های این بخش برای همه بازدیدکنندگان سایت نمایش داده می‌شوند.</p>
+      <div class="admin-grid">
+        <div class="field full"><label for="slideImage">عکس اسلاید *</label><input type="file" id="slideImage" accept="image/jpeg,image/png,image/webp"><img id="slidePreview" class="preview" alt="پیش‌نمایش اسلاید"></div>
+        <div class="field"><label for="slideTitle">عنوان اسلاید *</label><input id="slideTitle" maxlength="180" placeholder="مثلاً قطعات باکیفیت، انتخاب مطمئن"></div>
+        <div class="field"><label for="slideOrder">ترتیب نمایش</label><input id="slideOrder" type="number" min="0" max="999" value="0"></div>
+        <div class="field full"><label for="slideText">توضیحات</label><textarea id="slideText" maxlength="1200" placeholder="متن کوتاه اسلاید..."></textarea></div>
+      </div>
+      <div class="admin-actions"><button type="button" class="primary" id="saveSlideBtn">افزودن اسلاید</button><button type="button" class="outline" id="resetSlideBtn">پاک کردن فرم</button></div>
+      <div id="slideManageList" class="manage-list"></div>
       <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
       <h3 style="font-size:16px;margin-bottom:14px">اطلاعات شرکت و لوگو</h3>
       <div class="admin-grid">
@@ -151,7 +194,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     </div>
   </details>
 </main>
-<footer><b id="footerName">KTV</b> · کاتالوگ قطعات خودرو</footer>
+<footer><b id="footerName">KTV</b> · کاتالوگ قطعات خودرو<div style="margin-top:5px;font-size:10px;opacity:.72;direction:ltr;letter-spacing:.2px">Designed &amp; Developed by Sobhan Sameie</div></footer>
 <div id="modalRoot"></div><div id="toastRoot"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -183,6 +226,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
   var editingImageUrl = '';
   var pendingProductFile = null;
   var pendingLogoFile = null;
+  var slides = [];
+  var pendingSlideFile = null;
+  var editingSlideId = null;
+  var slideTimer = null;
+  var slideIndex = 0;
   var busy = false;
   var toastTimer = null;
 
@@ -337,6 +385,137 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     try { await sb.storage.from(BUCKET).remove([p]); } catch (e) { /* حذف عکس قدیمی اختیاری است */ }
   }
 
+
+  /* ---------- حالت روشن و تاریک ---------- */
+  function applyTheme(theme) {
+    var dark = theme === 'dark';
+    document.body.setAttribute('data-theme', dark ? 'dark' : 'light');
+    $('themeToggle').textContent = dark ? '☀' : '☾';
+    $('themeToggle').title = dark ? 'تغییر به حالت روشن' : 'تغییر به حالت تاریک';
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.setAttribute('content', dark ? '#0c1119' : '#101c2c');
+  }
+  function initTheme() {
+    var saved = 'light';
+    try { saved = localStorage.getItem('ktv-theme') || 'light'; } catch(e) {}
+    applyTheme(saved);
+    $('themeToggle').addEventListener('click', function () {
+      var next = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      applyTheme(next);
+      try { localStorage.setItem('ktv-theme', next); } catch(e) {}
+    });
+  }
+
+  /* ---------- اسلایدر صفحه اصلی ---------- */
+  function renderSlides() {
+    if (slideTimer) { clearInterval(slideTimer); slideTimer = null; }
+    var hero = $('heroSlider');
+    var list = $('slideManageList');
+    var active = slides.filter(function(s){ return s.is_active !== false; });
+    if (!active.length) {
+      hero.innerHTML = '<div class="hero-slide"><div><div class="eyebrow">KTV · AUTOMOTIVE PARTS</div><h2>قطعه مناسب، انتخاب مطمئن</h2><p>کاتالوگ قطعات خودرو؛ محصولات را ببینید و برای مشاهده مشخصات هر قطعه روی «اطلاعات» بزنید.</p><div class="hero-actions"><button type="button" class="primary" id="btnProducts">مشاهده محصولات ↓</button><button type="button" class="secondary" id="btnAbout2">آشنایی با شرکت</button></div></div><div class="hero-art">⚙️</div></div>';
+      bindHeroButtons();
+    } else {
+      if (slideIndex >= active.length) slideIndex = 0;
+      hero.innerHTML = active.map(function(s, i) {
+        return '<div class="hero-slide ' + (i === slideIndex ? '' : 'hidden') + '" data-slide-index="' + i + '">' +
+          (safeUrl(s.image_url) ? '<img class="hero-slide-bg" src="' + escapeHtml(s.image_url) + '" alt="">' : '') +
+          '<div><div class="eyebrow">KTV · AUTOMOTIVE PARTS</div><h2>' + escapeHtml(s.title) + '</h2><p>' + escapeHtml(s.description || '') + '</p>' +
+          '<div class="hero-actions"><button type="button" class="primary" id="btnProducts">مشاهده محصولات ↓</button><button type="button" class="secondary" id="btnAbout2">آشنایی با شرکت</button></div></div>' +
+          '<div class="hero-art" aria-hidden="true">⚙️</div></div>';
+      }).join('') +
+      (active.length > 1 ? '<button type="button" class="hero-arrow hero-prev" id="slidePrev" aria-label="اسلاید قبلی">›</button><button type="button" class="hero-arrow hero-next" id="slideNext" aria-label="اسلاید بعدی">‹</button><div class="hero-dots">' + active.map(function(s,i){return '<button type="button" class="hero-dot '+(i===slideIndex?'active':'')+'" data-slide-dot="'+i+'" aria-label="اسلاید '+(i+1)+'"></button>';}).join('') + '</div>' : '');
+      bindHeroButtons();
+      if (active.length > 1) {
+        $('slidePrev').addEventListener('click', function(){showSlide((slideIndex + active.length - 1) % active.length);});
+        $('slideNext').addEventListener('click', function(){showSlide((slideIndex + 1) % active.length);});
+        hero.querySelectorAll('[data-slide-dot]').forEach(function(b){b.addEventListener('click',function(){showSlide(Number(b.getAttribute('data-slide-dot')));});});
+      }
+    }
+    // اسلایدها هر ۵ ثانیه به‌صورت خودکار جابه‌جا می‌شوند؛ دکمه‌ها همچنان فعال‌اند.
+    // تایمر قبل از بخش مدیریت تنظیم می‌شود تا برای بازدیدکنندگان عادی هم اجرا شود.
+    if (active.length > 1) {
+      slideTimer = setInterval(function () {
+        showSlide(slideIndex + 1);
+      }, 5000);
+    }
+    if (list) {
+      if (!isAdmin) { list.innerHTML = ''; return; }
+      list.innerHTML = slides.length ? slides.map(function(s){
+        return '<div class="slide-admin-item"><img src="'+escapeHtml(s.image_url||placeholder)+'" alt=""><div><div class="slide-title">'+escapeHtml(s.title)+'</div><small>ترتیب: '+Number(s.sort_order||0)+' · '+(s.is_active?'فعال':'غیرفعال')+'</small><div class="admin-actions"><button type="button" class="outline" data-slide-edit="'+escapeHtml(s.id)+'">ویرایش</button><button type="button" class="outline" data-slide-toggle="'+escapeHtml(s.id)+'">'+(s.is_active?'غیرفعال کردن':'فعال کردن')+'</button><button type="button" class="danger" data-slide-delete="'+escapeHtml(s.id)+'">حذف</button></div></div></div>';
+      }).join('') : '<div class="empty">هنوز اسلایدی ثبت نشده است.</div>';
+    }
+  }
+  function showSlide(index) {
+    var active = slides.filter(function(s){return s.is_active !== false;});
+    if (!active.length) return;
+    slideIndex = (index + active.length) % active.length;
+    renderSlides();
+  }
+  function bindHeroButtons() {
+    var productsBtn = $('btnProducts'), aboutBtn = $('btnAbout2');
+    if (productsBtn) productsBtn.addEventListener('click',function(){scrollTo('productsSection');});
+    if (aboutBtn) aboutBtn.addEventListener('click',showAbout);
+  }
+  async function loadSlides() {
+    if (!sb) return;
+    var r = await sb.from('home_slides').select('id,title,description,image_url,sort_order,is_active,created_at').order('sort_order',{ascending:true}).order('created_at',{ascending:true});
+    if (r.error) {
+      console.warn('home_slides:',r.error);
+      // If migration has not been installed, preserve a usable default hero.
+      slides = [];
+    } else slides = r.data || [];
+    slideIndex = 0; renderSlides();
+  }
+  function resetSlideForm() {
+    editingSlideId = null; pendingSlideFile = null;
+    $('slideImage').value = ''; $('slideTitle').value = ''; $('slideText').value = ''; $('slideOrder').value = '0';
+    $('slidePreview').style.display = 'none'; $('saveSlideBtn').textContent = 'افزودن اسلاید';
+  }
+  async function saveSlide() {
+    if (busy) return;
+    if (!isAdmin) { toast('دسترسی مدیر لازم است.'); return; }
+    var title = $('slideTitle').value.trim();
+    if (!title) { toast('عنوان اسلاید را وارد کن.'); return; }
+    var old = slides.find(function(s){return String(s.id)===String(editingSlideId);});
+    if (!old && !pendingSlideFile) { toast('برای اسلاید جدید یک عکس انتخاب کن.'); return; }
+    setBusy(true); var uploaded = null;
+    try {
+      var imageUrl = old ? old.image_url : '';
+      if (pendingSlideFile) { uploaded = await uploadImage(pendingSlideFile,'slides'); imageUrl = uploaded.url; }
+      var payload = {title:title,description:$('slideText').value.trim(),image_url:imageUrl,sort_order:Math.max(0,Number($('slideOrder').value)||0),is_active:old ? old.is_active : true,updated_at:new Date().toISOString()};
+      var r = old ? await sb.from('home_slides').update(payload).eq('id',old.id).select().single()
+                  : await sb.from('home_slides').insert(payload).select().single();
+      if (r.error) throw r.error;
+      if (uploaded && old && old.image_url) removeImageByUrl(old.image_url);
+      resetSlideForm(); await loadSlides(); toast('اسلاید ذخیره شد.');
+    } catch(e) { if (uploaded) removeImageByUrl(uploaded.url); console.error(e); toast('اسلاید ذخیره نشد: '+errText(e)+'؛ مطمئن شو جدول home_slides ساخته شده باشد.'); }
+    finally { setBusy(false); }
+  }
+  async function deleteSlide(id) {
+    if (!isAdmin || busy) return;
+    var s=slides.find(function(x){return String(x.id)===String(id);});
+    if (!s || !confirm('این اسلاید حذف شود؟')) return;
+    setBusy(true);
+    try { var r=await sb.from('home_slides').delete().eq('id',id); if(r.error) throw r.error; if(s.image_url) removeImageByUrl(s.image_url); await loadSlides(); toast('اسلاید حذف شد.'); }
+    catch(e){toast('حذف نشد: '+errText(e));} finally{setBusy(false);}
+  }
+  async function toggleSlide(id) {
+    if (!isAdmin || busy) return;
+    var s=slides.find(function(x){return String(x.id)===String(id);}); if(!s)return;
+    setBusy(true);
+    try {var r=await sb.from('home_slides').update({is_active:!s.is_active,updated_at:new Date().toISOString()}).eq('id',id);if(r.error)throw r.error;await loadSlides();toast('وضعیت اسلاید تغییر کرد.');}
+    catch(e){toast('تغییر وضعیت انجام نشد: '+errText(e));}finally{setBusy(false);}
+  }
+  function editSlide(id) {
+    var s=slides.find(function(x){return String(x.id)===String(id);}); if(!s)return;
+    editingSlideId=s.id; pendingSlideFile=null;
+    $('slideTitle').value=s.title||''; $('slideText').value=s.description||''; $('slideOrder').value=String(s.sort_order||0);
+    $('slidePreview').src=s.image_url||''; $('slidePreview').style.display=s.image_url?'block':'none';
+    $('slideImage').value=''; $('saveSlideBtn').textContent='ذخیره تغییرات اسلاید';
+    $('manageSection').open=true; scrollTo('slideTitle');
+  }
+
   /* ---------- نمایش اطلاعات شرکت ---------- */
   function applyCompany() {
     var name = company.name || DEFAULT_NAME;
@@ -367,7 +546,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     }
     var q = $('search').value.trim().toLowerCase();
     var list = products.filter(function (p) {
-      return (p.name + ' ' + (p.category || '') + ' ' + (p.product_group || '') + ' ' + (p.suitable_cars || '') + ' ' + (p.info || '')).toLowerCase().indexOf(q) !== -1;
+      return (p.name + ' ' + (p.category || '') + ' ' + (p.product_group || '') + ' ' + (p.manufacturer || '') + ' ' + (p.suitable_cars || '') + ' ' + (p.info || '')).toLowerCase().indexOf(q) !== -1;
     });
     if (!list.length) {
       grid.innerHTML = '<div class="empty">' + (products.length ? 'محصولی با این عبارت پیدا نشد.' : 'هنوز محصولی ثبت نشده است.') + '</div>';
@@ -399,6 +578,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     var img = safeUrl(p.image_url) || placeholder;
     var cars = (p.suitable_cars || '').trim();
     var group = (p.product_group || '').trim();
+    var manufacturer = (p.manufacturer || '').trim();
     var info = (p.info || '').trim();
     function detailBox(title, value, fallback) {
       if (!value) value = fallback || 'ثبت نشده است.';
@@ -406,7 +586,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     }
     $('modalRoot').innerHTML = '<div class="overlay" id="overlay"><div class="modal product-detail-modal" role="dialog" aria-modal="true" aria-label="مشخصات محصول"><div class="modal-head"><div><span class="detail-kicker">KTV · مشخصات محصول</span><h2>' + escapeHtml(p.name) + '</h2></div><button type="button" class="close" id="closeModalBtn" aria-label="بستن">×</button></div>' +
       '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(p.name) + '"><div class="detail-tags"><span class="product-tag">' + escapeHtml(p.category || 'قطعات خودرو') + '</span>' + (group ? '<span class="product-tag group-tag">' + escapeHtml(group) + '</span>' : '') + '</div>' +
-      '<div class="detail-grid">' + detailBox('گروه محصول', group) + detailBox('مناسب برای خودروهای', cars, 'خودروی سازگار ثبت نشده است.') + '</div>' +
+      '<div class="detail-grid">' + detailBox('گروه محصول', group) + detailBox('سازنده', manufacturer) + detailBox('مناسب برای خودروهای', cars, 'خودروی سازگار ثبت نشده است.') + '</div>' +
       detailBox('توضیحات و مشخصات فنی', info, 'برای این محصول توضیحات بیشتری ثبت نشده است.') +
       '<button type="button" class="primary detail-close" id="closeModalBtn2">بستن</button></div></div>';
   }
@@ -422,7 +602,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
   /* ---------- بارگذاری داده‌ها ---------- */
   async function loadProducts() {
     productsState = 'loading'; renderProducts();
-    var r = await sb.from('products').select('id,name,category,product_group,suitable_cars,info,image_url,created_at,updated_at').order('created_at', { ascending: false });
+    var r = await sb.from('products').select('id,name,category,product_group,manufacturer,suitable_cars,info,image_url,created_at,updated_at').order('created_at', { ascending: false });
     if (r.error) { console.error('products:', r.error); productsState = 'error'; products = []; }
     else { products = r.data || []; productsState = 'ok'; }
     renderProducts(); renderManage();
@@ -461,7 +641,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     if (state === 'loading') $('authLoading').classList.remove('hidden');
     else if (state === 'login') $('loginBox').classList.remove('hidden');
     else if (state === 'notadmin') { $('notAdminEmail').textContent = email || ''; $('notAdminBox').classList.remove('hidden'); }
-    else if (state === 'admin') { $('adminEmail').textContent = email || ''; $('adminPanel').classList.remove('hidden'); }
+    else if (state === 'admin') { $('adminEmail').textContent = email || ''; $('adminPanel').classList.remove('hidden'); renderSlides(); }
   }
   async function applySession(session) {
     currentUser = session && session.user ? session.user : null;
@@ -497,7 +677,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
   /* ---------- مدیریت محصولات ---------- */
   function resetProductForm() {
     editingId = null; editingImageUrl = ''; pendingProductFile = null;
-    $('productName').value = ''; $('productCategory').value = ''; $('productGroup').value = ''; $('suitableCars').value = ''; $('productInfo').value = '';
+    $('productName').value = ''; $('productCategory').value = ''; $('productGroup').value = ''; $('productManufacturer').value = ''; $('suitableCars').value = ''; $('productInfo').value = '';
     $('productImage').value = ''; $('productPreview').style.display = 'none'; $('productPreview').removeAttribute('src');
     $('formTitle').textContent = 'افزودن محصول';
   }
@@ -511,7 +691,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     try {
       var imageUrl = editingImageUrl;
       if (pendingProductFile) { uploaded = await uploadImage(pendingProductFile, 'products'); imageUrl = uploaded.url; }
-      var payload = { name: name, category: $('productCategory').value.trim() || 'قطعات خودرو', product_group: $('productGroup').value.trim() || null, suitable_cars: $('suitableCars').value.trim() || null, info: $('productInfo').value.trim() || null, image_url: imageUrl || null };
+      var payload = { name: name, category: $('productCategory').value.trim() || 'قطعات خودرو', product_group: $('productGroup').value.trim() || null, manufacturer: $('productManufacturer').value.trim() || null, suitable_cars: $('suitableCars').value.trim() || null, info: $('productInfo').value.trim() || null, image_url: imageUrl || null };
       if (editingId) {
         payload.updated_at = new Date().toISOString();
         var u = await sb.from('products').update(payload).eq('id', editingId).select('id');
@@ -535,7 +715,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     var p = products.find(function (x) { return x.id === id; });
     if (!p) return;
     editingId = id; editingImageUrl = p.image_url || ''; pendingProductFile = null;
-    $('productName').value = p.name || ''; $('productCategory').value = p.category || ''; $('productGroup').value = p.product_group || ''; $('suitableCars').value = p.suitable_cars || ''; $('productInfo').value = p.info || '';
+    $('productName').value = p.name || ''; $('productCategory').value = p.category || ''; $('productGroup').value = p.product_group || ''; $('productManufacturer').value = p.manufacturer || ''; $('suitableCars').value = p.suitable_cars || ''; $('productInfo').value = p.info || '';
     $('productImage').value = '';
     var img = safeUrl(p.image_url);
     if (img) { $('productPreview').src = img; $('productPreview').style.display = 'block'; } else { $('productPreview').style.display = 'none'; }
@@ -640,6 +820,10 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     $('saveProductBtn').addEventListener('click', saveProduct);
     $('resetProductBtn').addEventListener('click', resetProductForm);
     $('saveCompanyBtn').addEventListener('click', saveCompany);
+    $('saveSlideBtn').addEventListener('click', saveSlide);
+    $('resetSlideBtn').addEventListener('click', resetSlideForm);
+    $('slideImage').addEventListener('change',function(e){var f=e.target.files[0];if(!f){pendingSlideFile=null;return;}if(!checkImageFile(f)){e.target.value='';pendingSlideFile=null;return;}pendingSlideFile=f;$('slidePreview').src=URL.createObjectURL(f);$('slidePreview').style.display='block';});
+    $('slideManageList').addEventListener('click',function(e){var b=e.target.closest('[data-slide-edit]');if(b){editSlide(b.getAttribute('data-slide-edit'));return;}b=e.target.closest('[data-slide-delete]');if(b){deleteSlide(b.getAttribute('data-slide-delete'));return;}b=e.target.closest('[data-slide-toggle]');if(b)toggleSlide(b.getAttribute('data-slide-toggle'));});
     $('insertSquareBtn').addEventListener('click', insertSquareBullet);
     $('insertSquareNewLineBtn').addEventListener('click', function () {
       var area = $('productInfo');
@@ -668,6 +852,8 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
   /* ---------- شروع ---------- */
   async function init() {
     bindEvents();
+    initTheme();
+    renderSlides();
     applyCompany();
     renderProducts();
     if (!window.supabase || !window.supabase.createClient) {
@@ -686,6 +872,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 
     loadCompany();
     loadProducts();
+    loadSlides();
     var s = await sb.auth.getSession();
     await applySession(s && s.data ? s.data.session : null);
   }
