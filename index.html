@@ -26,6 +26,8 @@ footer{background:var(--navy);color:#d0d8e2;padding:25px 18px;text-align:center;
 .detail-kicker{display:block;color:#a9781d;font-size:10px;font-weight:800;margin-bottom:5px;letter-spacing:.4px}
 .product-detail-modal{width:min(680px,100%);border:1px solid #e8edf3;box-shadow:0 24px 80px #06101f55}
 .product-detail-modal>img{max-height:320px;margin:18px 0;background:linear-gradient(135deg,#f7f9fc,#edf1f6);padding:10px}
+.product-gallery{position:relative;margin:0 0 18px}.gallery-frame{height:clamp(220px,42vw,360px);position:relative;display:grid;place-items:center;background:linear-gradient(135deg,#f7f9fc,#edf1f6);border:1px solid var(--line);border-radius:16px;overflow:hidden}.gallery-frame img{width:100%;height:100%;object-fit:contain;margin:0;padding:12px;background:transparent;border-radius:0}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:1px solid #dce3eb;border-radius:50%;background:#ffffffed;color:#172333;font-size:24px;display:grid;place-items:center;z-index:2}.gallery-prev{right:10px}.gallery-next{left:10px}.gallery-dots{display:flex;justify-content:center;gap:7px;margin:11px 0 0}.gallery-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#c5ced9}.gallery-dot.active{background:var(--accent);transform:scale(1.25)}.gallery-count{text-align:center;color:var(--muted);font-size:11px;margin-top:5px}
+.preview-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}.preview-item{position:relative;width:88px}.preview-list img{width:88px;height:82px;object-fit:contain;background:#eef1f5;border-radius:10px;border:1px solid var(--line);padding:3px;display:block}.preview-remove{width:100%;margin-top:4px;border:1px solid #efc8c8;background:#fff4f4;color:#a32e2e;border-radius:8px;padding:5px 3px;font-size:10px}
 .detail-tags{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 14px}.group-tag{background:#e9f2ff;color:#245b92}
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
 .detail-box{border:1px solid #e1e7ef;background:linear-gradient(145deg,#fff,#f8fafc);border-radius:15px;padding:15px 16px;margin:10px 0;box-shadow:0 4px 14px #17233308}
@@ -202,7 +204,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 
       <h3 style="margin:22px 0 8px;font-size:16px" id="formTitle">افزودن محصول</h3>
       <div class="admin-grid">
-        <div class="field full"><label for="productImage">عکس محصول</label><input type="file" id="productImage" accept="image/jpeg,image/png,image/webp"><img id="productPreview" class="preview" alt="پیش‌نمایش عکس"></div>
+        <div class="field full"><label for="productImage">عکس‌های محصول (می‌توانی چند عکس انتخاب کنی)</label><input type="file" id="productImage" accept="image/jpeg,image/png,image/webp" multiple><small style="color:var(--muted);line-height:1.8">برای انتخاب چند عکس، هنگام انتخاب فایل‌ها Ctrl را نگه دار. در ویرایش، عکس‌های جدید به عکس‌های قبلی اضافه می‌شوند.</small><div id="productPreviewList" class="preview-list"></div></div>
         <div class="field"><label for="productName">نام محصول *</label><input id="productName" maxlength="200" placeholder="مثلاً فیلتر هوا"></div>
         <div class="field"><label for="productCategory">دسته‌بندی (اختیاری)</label><input id="productCategory" maxlength="100" placeholder="مثلاً سیستم موتور"></div>
         <div class="field"><label for="productGroup">گروه محصول</label><input id="productGroup" maxlength="150" placeholder="مثلاً سیستم تعلیق و جلوبندی"></div>
@@ -265,7 +267,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
   var isAdmin = false;
   var editingId = null;
   var editingImageUrl = '';
-  var pendingProductFile = null;
+  var pendingProductFiles = [];
+  var editingImageUrls = [];
+  var removedProductImageUrls = [];
+  var galleryTimer = null;
+  var galleryIndex = 0;
   var pendingLogoFile = null;
   var slides = [];
   var pendingSlideFile = null;
@@ -530,7 +536,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       if (r.error) throw r.error;
       if (uploaded && old && old.image_url) removeImageByUrl(old.image_url);
       resetSlideForm(); await loadSlides(); toast('اسلاید ذخیره شد.');
-    } catch(e) { if (uploaded) removeImageByUrl(uploaded.url); console.error(e); toast('اسلاید ذخیره نشد: '+errText(e)+'؛ مطمئن شو جدول home_slides ساخته شده باشد.'); }
+    } catch(e) { uploaded.forEach(function(u){ removeImageByUrl(u.url); }); console.error(e); toast('اسلاید ذخیره نشد: '+errText(e)+'؛ مطمئن شو جدول home_slides ساخته شده باشد.'); }
     finally { setBusy(false); }
   }
   async function deleteSlide(id) {
@@ -595,7 +601,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     }
     grid.innerHTML = list.map(function (p) {
       var info = p.info || '';
-      var img = safeUrl(p.image_url) || placeholder;
+      var img = safeUrl((Array.isArray(p.image_urls) && p.image_urls.length ? p.image_urls[0] : p.image_url)) || placeholder;
       return '<article class="product"><div class="product-photo"><img loading="lazy" src="' + escapeHtml(img) + '" alt="' + escapeHtml(p.name) + '"></div>' +
         '<div class="product-body"><span class="product-tag">' + escapeHtml(p.category || 'قطعات خودرو') + '</span>' +
         '<h3>' + escapeHtml(p.name) + '</h3>' +
@@ -616,7 +622,11 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
   function showInfo(id) {
     var p = products.find(function (x) { return x.id === id; });
     if (!p) return;
-    var img = safeUrl(p.image_url) || placeholder;
+    var photoUrls = (Array.isArray(p.image_urls) && p.image_urls.length ? p.image_urls : (p.image_url ? [p.image_url] : [])).map(safeUrl).filter(Boolean);
+    var img = photoUrls[0] || safeUrl(p.image_url) || placeholder;
+    galleryIndex = 0;
+    var gallery = photoUrls.length > 1 ? '<div class="product-gallery" id="productGallery"><div class="gallery-frame"><button type="button" class="gallery-arrow gallery-prev" data-gallery-prev aria-label="عکس قبلی">‹</button><img id="galleryMainImage" src="' + escapeHtml(photoUrls[0]) + '" alt="' + escapeHtml(p.name) + '"><button type="button" class="gallery-arrow gallery-next" data-gallery-next aria-label="عکس بعدی">›</button></div><div class="gallery-dots">' + photoUrls.map(function(url,idx){return '<button type="button" class="gallery-dot' + (idx===0?' active':'') + '" data-gallery-index="' + idx + '" aria-label="نمایش عکس ' + (idx+1) + '"></button>';}).join('') + '</div><div class="gallery-count"><span id="galleryCurrent">1</span> / ' + photoUrls.length + '</div></div>' : '';
+    if (galleryTimer) { clearInterval(galleryTimer); galleryTimer = null; }
     var cars = (p.suitable_cars || '').trim();
     var group = (p.product_group || '').trim();
     var manufacturer = (p.manufacturer || '').trim();
@@ -626,10 +636,24 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       return '<section class="detail-box"><h3>' + escapeHtml(title) + '</h3>' + renderDescription(value) + '</section>';
     }
     $('modalRoot').innerHTML = '<div class="overlay" id="overlay"><div class="modal product-detail-modal" role="dialog" aria-modal="true" aria-label="مشخصات محصول"><div class="modal-head"><div><span class="detail-kicker">KTV · مشخصات محصول</span><h2>' + escapeHtml(p.name) + '</h2></div><button type="button" class="close" id="closeModalBtn" aria-label="بستن">×</button></div>' +
-      '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(p.name) + '"><div class="detail-tags"><span class="product-tag">' + escapeHtml(p.category || 'قطعات خودرو') + '</span>' + (group ? '<span class="product-tag group-tag">' + escapeHtml(group) + '</span>' : '') + '</div>' +
+      (photoUrls.length > 1 ? gallery : '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(p.name) + '">') + '<div class="detail-tags"><span class="product-tag">' + escapeHtml(p.category || 'قطعات خودرو') + '</span>' + (group ? '<span class="product-tag group-tag">' + escapeHtml(group) + '</span>' : '') + '</div>' +
       '<div class="detail-grid">' + detailBox('گروه محصول', group) + detailBox('سازنده', manufacturer) + detailBox('مناسب برای خودروهای', cars, 'خودروی سازگار ثبت نشده است.') + '</div>' +
       detailBox('توضیحات و مشخصات فنی', info, 'برای این محصول توضیحات بیشتری ثبت نشده است.') +
       '<button type="button" class="primary detail-close" id="closeModalBtn2">بستن</button></div></div>';
+    if (photoUrls.length > 1) {
+      function setGalleryImage(nextIndex) {
+        galleryIndex = (nextIndex + photoUrls.length) % photoUrls.length;
+        var main = $('galleryMainImage'); if (main) main.src = photoUrls[galleryIndex];
+        var current = $('galleryCurrent'); if (current) current.textContent = String(galleryIndex + 1);
+        Array.prototype.forEach.call(document.querySelectorAll('[data-gallery-index]'), function(dot, i) { dot.classList.toggle('active', i === galleryIndex); });
+      }
+      $('productGallery').addEventListener('click', function(e) {
+        if (e.target.closest('[data-gallery-prev]')) { setGalleryImage(galleryIndex - 1); }
+        else if (e.target.closest('[data-gallery-next]')) { setGalleryImage(galleryIndex + 1); }
+        else { var dot = e.target.closest('[data-gallery-index]'); if (dot) setGalleryImage(Number(dot.getAttribute('data-gallery-index'))); }
+      });
+      galleryTimer = setInterval(function() { if ($('galleryMainImage')) setGalleryImage(galleryIndex + 1); else { clearInterval(galleryTimer); galleryTimer = null; } }, 3500);
+    }
   }
   function showAbout() {
     var name = company.name || DEFAULT_NAME;
@@ -638,12 +662,12 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       (logo ? '<img class="about-modal-logo" src="' + escapeHtml(logo) + '" alt="لوگوی شرکت">' : '') +
       '<section class="detail-box about-copy"><h3>معرفی شرکت</h3><div>' + escapeHtml(company.info || DEFAULT_INFO) + '</div></section><button type="button" class="primary detail-close" id="closeModalBtn2">متوجه شدم</button></div></div>';
   }
-  function closeModal() { $('modalRoot').innerHTML = ''; }
+  function closeModal() { if (galleryTimer) { clearInterval(galleryTimer); galleryTimer = null; } $('modalRoot').innerHTML = ''; }
 
   /* ---------- بارگذاری داده‌ها ---------- */
   async function loadProducts() {
     productsState = 'loading'; renderProducts();
-    var r = await sb.from('products').select('id,name,category,product_group,manufacturer,suitable_cars,info,image_url,created_at,updated_at').order('created_at', { ascending: false });
+    var r = await sb.from('products').select('id,name,category,product_group,manufacturer,suitable_cars,info,image_url,image_urls,created_at,updated_at').order('created_at', { ascending: false });
     if (r.error) { console.error('products:', r.error); productsState = 'error'; products = []; }
     else { products = r.data || []; productsState = 'ok'; }
     renderProducts(); renderManage();
@@ -716,10 +740,17 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
   }
 
   /* ---------- مدیریت محصولات ---------- */
+  function renderProductPreviews() {
+    var box = $('productPreviewList');
+    if (!box) return;
+    var existing = editingImageUrls.map(function(url, idx) { return '<div class="preview-item"><img src="' + escapeHtml(url) + '" alt="عکس محصول"><button type="button" class="preview-remove" data-remove-existing="' + idx + '">حذف این عکس</button></div>'; }).join('');
+    var pending = pendingProductFiles.map(function(file, idx) { var url = URL.createObjectURL(file); return '<div class="preview-item"><img src="' + escapeHtml(url) + '" alt="عکس جدید"><button type="button" class="preview-remove" data-remove-pending="' + idx + '">حذف این عکس</button></div>'; }).join('');
+    box.innerHTML = existing + pending;
+  }
   function resetProductForm() {
-    editingId = null; editingImageUrl = ''; pendingProductFile = null;
+    editingId = null; editingImageUrls = []; pendingProductFiles = []; removedProductImageUrls = [];
     $('productName').value = ''; $('productCategory').value = ''; $('productGroup').value = ''; $('productManufacturer').value = ''; $('suitableCars').value = ''; $('productInfo').value = '';
-    $('productImage').value = ''; $('productPreview').style.display = 'none'; $('productPreview').removeAttribute('src');
+    $('productImage').value = ''; $('productPreviewList').innerHTML = '';
     $('formTitle').textContent = 'افزودن محصول';
   }
   async function saveProduct() {
@@ -728,38 +759,39 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     var name = $('productName').value.trim();
     if (!name) { toast('لطفاً نام محصول را وارد کنید.'); return; }
     setBusy(true);
-    var uploaded = null;
+    var uploaded = [];
     try {
-      var imageUrl = editingImageUrl;
-      if (pendingProductFile) { uploaded = await uploadImage(pendingProductFile, 'products'); imageUrl = uploaded.url; }
-      var payload = { name: name, category: $('productCategory').value.trim() || 'قطعات خودرو', product_group: $('productGroup').value.trim() || null, manufacturer: $('productManufacturer').value.trim() || null, suitable_cars: $('suitableCars').value.trim() || null, info: $('productInfo').value.trim() || null, image_url: imageUrl || null };
+      var imageUrls = editingImageUrls.slice();
+      for (var pi = 0; pi < pendingProductFiles.length; pi++) { var oneUpload = await uploadImage(pendingProductFiles[pi], 'products'); uploaded.push(oneUpload); imageUrls.push(oneUpload.url); }
+      var imageUrl = imageUrls[0] || null;
+      var payload = { name: name, category: $('productCategory').value.trim() || 'قطعات خودرو', product_group: $('productGroup').value.trim() || null, manufacturer: $('productManufacturer').value.trim() || null, suitable_cars: $('suitableCars').value.trim() || null, info: $('productInfo').value.trim() || '', image_url: imageUrl, image_urls: imageUrls }; 
       if (editingId) {
         payload.updated_at = new Date().toISOString();
         var u = await sb.from('products').update(payload).eq('id', editingId).select('id');
         if (u.error) throw u.error;
         if (!u.data || !u.data.length) throw new Error('ویرایش انجام نشد (دسترسی یا شناسه نامعتبر).');
-        if (uploaded && editingImageUrl) removeImageByUrl(editingImageUrl);
+        
       } else {
         var i = await sb.from('products').insert(payload).select('id');
         if (i.error) throw i.error;
       }
+      removedProductImageUrls.forEach(function(url) { removeImageByUrl(url); });
       resetProductForm();
       await loadProducts();
       toast('محصول ذخیره شد.');
     } catch (e) {
       console.error(e);
-      if (uploaded) removeImageByUrl(uploaded.url);
+      uploaded.forEach(function(u){ removeImageByUrl(u.url); });
       toast('ذخیره نشد: ' + errText(e));
     } finally { setBusy(false); }
   }
   function editProduct(id) {
     var p = products.find(function (x) { return x.id === id; });
     if (!p) return;
-    editingId = id; editingImageUrl = p.image_url || ''; pendingProductFile = null;
+    editingId = id; editingImageUrls = (Array.isArray(p.image_urls) && p.image_urls.length ? p.image_urls.slice() : (p.image_url ? [p.image_url] : [])); pendingProductFiles = []; removedProductImageUrls = [];
     $('productName').value = p.name || ''; $('productCategory').value = p.category || ''; $('productGroup').value = p.product_group || ''; $('productManufacturer').value = p.manufacturer || ''; $('suitableCars').value = p.suitable_cars || ''; $('productInfo').value = p.info || '';
     $('productImage').value = '';
-    var img = safeUrl(p.image_url);
-    if (img) { $('productPreview').src = img; $('productPreview').style.display = 'block'; } else { $('productPreview').style.display = 'none'; }
+    renderProductPreviews();
     $('formTitle').textContent = 'ویرایش محصول';
     $('manageSection').open = true; $('productName').focus();
     scrollTo('formTitle');
@@ -773,7 +805,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       var r = await sb.from('products').delete().eq('id', id).select('id');
       if (r.error) throw r.error;
       if (!r.data || !r.data.length) throw new Error('حذف انجام نشد (دسترسی مجاز نیست).');
-      removeImageByUrl(p.image_url);
+      (Array.isArray(p.image_urls) && p.image_urls.length ? p.image_urls : [p.image_url]).filter(Boolean).forEach(removeImageByUrl);
       if (editingId === id) resetProductForm();
       await loadProducts();
       toast('محصول حذف شد.');
@@ -814,7 +846,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       toast('اطلاعات شرکت ذخیره شد.');
     } catch (e) {
       console.error(e);
-      if (uploaded) removeImageByUrl(uploaded.url);
+      uploaded.forEach(function(u){ removeImageByUrl(u.url); });
       toast('ذخیره نشد: ' + errText(e));
     } finally { setBusy(false); }
   }
@@ -874,12 +906,22 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
       area.focus();
       area.setSelectionRange(area.value.length, area.value.length);
     });
+    $('productPreviewList').addEventListener('click', function(e) {
+      var existing = e.target.closest('[data-remove-existing]');
+      if (existing) {
+        var idx = Number(existing.getAttribute('data-remove-existing'));
+        if (idx >= 0 && idx < editingImageUrls.length) { removedProductImageUrls.push(editingImageUrls[idx]); editingImageUrls.splice(idx, 1); renderProductPreviews(); }
+        return;
+      }
+      var pending = e.target.closest('[data-remove-pending]');
+      if (pending) { var pi = Number(pending.getAttribute('data-remove-pending')); if (pi >= 0 && pi < pendingProductFiles.length) pendingProductFiles.splice(pi, 1); renderProductPreviews(); }
+    });
     $('productImage').addEventListener('change', function (e) {
-      var f = e.target.files[0];
-      if (!f) { pendingProductFile = null; return; }
-      if (!checkImageFile(f)) { e.target.value = ''; pendingProductFile = null; return; }
-      pendingProductFile = f;
-      $('productPreview').src = URL.createObjectURL(f); $('productPreview').style.display = 'block';
+      var files = Array.prototype.slice.call(e.target.files || []);
+      if (!files.length) { pendingProductFiles = []; renderProductPreviews(); return; }
+      for (var fi = 0; fi < files.length; fi++) { if (!checkImageFile(files[fi])) { e.target.value = ''; pendingProductFiles = []; renderProductPreviews(); return; } }
+      pendingProductFiles = files;
+      renderProductPreviews();
     });
     $('companyLogo').addEventListener('change', function (e) {
       var f = e.target.files[0];
