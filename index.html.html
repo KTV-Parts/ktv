@@ -1,0 +1,696 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;500;600;700;800;900&family=Estedad:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#101c2c">
+<title>KTV | کاتالوگ قطعات خودرو</title>
+<style>
+:root{--navy:#101c2c;--navy2:#192a40;--silver:#d8dee7;--bg:#f3f5f8;--card:#fff;--ink:#172333;--muted:#697789;--line:#e0e5ec;--accent:#e6a83b;--radius:18px}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:"Vazirmatn","Estedad",Tahoma,sans-serif}
+button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.55;cursor:not-allowed}
+.hidden{display:none!important}
+header{background:linear-gradient(130deg,var(--navy),var(--navy2));color:white;padding:16px max(16px,calc((100vw - 1180px)/2));position:sticky;top:0;z-index:5;box-shadow:0 8px 28px #101c2c20}
+.top{display:flex;align-items:center;gap:14px;max-width:1180px;margin:auto}.brand{display:flex;align-items:center;gap:11px;min-width:0}.logo{width:48px;height:48px;border-radius:13px;object-fit:contain;background:white;padding:4px;display:none}.logo-fallback{width:48px;height:48px;border:1px solid #ffffff55;border-radius:13px;display:grid;place-items:center;font-weight:900;letter-spacing:1px;color:var(--accent);font-size:18px;flex-shrink:0}.brand h1{font-size:19px;margin:0;letter-spacing:.4px}.brand p{margin:4px 0 0;color:#c4cedb;font-size:11px}.top-spacer{flex:1}.header-btn{border:1px solid #ffffff40;background:#ffffff10;color:white;border-radius:12px;padding:10px 13px;font-size:13px;white-space:nowrap}
+main{max-width:1180px;margin:auto;padding:24px 18px 70px}.hero{border-radius:24px;background:linear-gradient(120deg,#16263a,#243c56);color:white;padding:clamp(22px,5vw,46px);display:grid;grid-template-columns:1.3fr .7fr;gap:22px;align-items:center;overflow:hidden;position:relative}.hero:after{content:"KTV";font-size:clamp(90px,18vw,210px);font-weight:900;color:#ffffff08;position:absolute;left:0;bottom:-45px;letter-spacing:-8px}.eyebrow{color:var(--accent);font-size:12px;font-weight:bold;letter-spacing:1px}.hero h2{font-size:clamp(25px,4vw,40px);line-height:1.5;margin:10px 0}.hero p{color:#d1dae5;line-height:2;margin:0;max-width:580px;font-size:14px}.hero-art{height:150px;display:grid;place-items:center;font-size:76px;opacity:.92;position:relative;z-index:1}.hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.primary,.secondary,.outline{border:0;border-radius:12px;padding:12px 17px;font-weight:bold;font-size:13px}.primary{background:var(--accent);color:#1a2635}.secondary{background:white;color:var(--navy)}.outline{background:transparent;border:1px solid var(--line);color:var(--ink)}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:30px 0 16px}.section-head h2{margin:0;font-size:21px}.section-head p{margin:6px 0 0;color:var(--muted);font-size:12px}.tools{display:flex;gap:9px;align-items:center}.search{width:min(280px,45vw);border:1px solid var(--line);background:white;border-radius:12px;padding:11px 13px;outline:none}.search:focus,input:focus,textarea:focus{border-color:#d9a13c;box-shadow:0 0 0 3px #e6a83b20}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}.product{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;transition:transform .18s,box-shadow .18s;min-width:0}.product:hover{transform:translateY(-3px);box-shadow:0 12px 28px #15263b12}.product-photo{width:100%;aspect-ratio:1.25;background:#e9edf2;display:grid;place-items:center;overflow:hidden}.product-photo img{width:100%;height:100%;object-fit:cover}.placeholder{font-size:44px;color:#a8b2bf}.product-body{padding:15px}.product-tag{font-size:10px;color:#986718;background:#fff4dc;padding:5px 8px;border-radius:20px;display:inline-block}.product h3{font-size:15px;margin:11px 0 7px;line-height:1.7;overflow-wrap:anywhere}.product .summary{color:var(--muted);font-size:12px;line-height:1.8;min-height:42px;white-space:pre-wrap;overflow-wrap:anywhere}.product-bottom{display:flex;gap:8px;margin-top:14px}.product-bottom button{flex:1;padding:10px 6px;font-size:12px}.info-btn{border:1px solid var(--line);background:#fff;color:var(--navy);border-radius:10px;font-weight:bold}.empty{background:white;border:1px dashed #cbd3de;border-radius:18px;padding:42px 18px;text-align:center;color:var(--muted);grid-column:1/-1;line-height:2}
+.spinner{width:30px;height:30px;border:3px solid #dfe5ec;border-top-color:var(--accent);border-radius:50%;margin:0 auto 12px;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+.about{margin-top:32px;background:white;border:1px solid var(--line);border-radius:22px;padding:clamp(20px,4vw,34px);display:grid;grid-template-columns:140px 1fr;gap:25px;align-items:start}.about-logo{width:130px;height:130px;object-fit:contain;border:1px solid var(--line);border-radius:18px;padding:8px;background:#fff}.about h2{margin:0 0 10px;font-size:22px}.about p{margin:0;color:var(--muted);white-space:pre-wrap;line-height:2.1;font-size:14px}.admin{display:none;margin-top:32px;background:#fff;border:1px solid var(--line);border-radius:20px;padding:22px}.admin.admin-revealed{display:block}.admin summary{cursor:pointer;font-weight:bold}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:12px;color:var(--muted);font-weight:bold}.field input,.field textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:12px;background:#fbfcfe;outline:none}.field textarea{min-height:95px;resize:vertical;line-height:1.8}.preview{width:90px;height:90px;object-fit:contain;background:#eef1f5;border-radius:12px;display:none}.admin-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.manage-list{display:grid;gap:8px;margin-top:16px}.manage-row{display:flex;gap:10px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:12px}.manage-row img{width:48px;height:48px;object-fit:cover;border-radius:8px}.manage-row .grow{flex:1;min-width:0}.manage-row b{font-size:13px;overflow-wrap:anywhere}.manage-row small{display:block;color:var(--muted);margin-top:4px}.danger{border:1px solid #efc8c8;background:#fff4f4;color:#a32e2e;border-radius:9px;padding:8px 10px;font-size:12px}
+.login-box{max-width:420px;margin:18px auto 4px}.login-box .field{margin-bottom:14px}.form-msg{font-size:12px;line-height:1.9;margin-top:10px;color:#a32e2e;min-height:1em}.form-msg.ok{color:#237a45}.admin-bar{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#f6f8fb;border:1px solid var(--line);border-radius:12px;padding:10px 14px;margin-top:14px;font-size:12px;color:var(--muted)}.admin-bar b{color:var(--ink);direction:ltr;unicode-bidi:embed}
+footer{background:var(--navy);color:#d0d8e2;padding:25px 18px;text-align:center;font-size:12px;line-height:2}footer b{color:var(--accent)}
+.overlay{position:fixed;inset:0;background:#08111dcc;z-index:20;display:grid;place-items:center;padding:16px}.modal{width:min(520px,100%);max-height:90vh;overflow:auto;background:white;border-radius:20px;padding:20px}.modal-head{display:flex;align-items:center;gap:12px;justify-content:space-between}.modal h2{font-size:19px;margin:0;overflow-wrap:anywhere}.close{border:0;background:#eef1f5;border-radius:10px;width:38px;height:38px;font-size:22px}.modal img{width:100%;max-height:280px;object-fit:contain;background:#eef1f5;border-radius:14px;margin:16px 0}.modal p{white-space:pre-wrap;line-height:2;color:#4f5d6c;font-size:14px;overflow-wrap:anywhere}
+.detail-kicker{display:block;color:#a9781d;font-size:10px;font-weight:800;margin-bottom:5px;letter-spacing:.4px}
+.product-detail-modal{width:min(680px,100%);border:1px solid #e8edf3;box-shadow:0 24px 80px #06101f55}
+.product-detail-modal>img{max-height:320px;margin:18px 0;background:linear-gradient(135deg,#f7f9fc,#edf1f6);padding:10px}
+.detail-tags{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 14px}.group-tag{background:#e9f2ff;color:#245b92}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+.detail-box{border:1px solid #e1e7ef;background:linear-gradient(145deg,#fff,#f8fafc);border-radius:15px;padding:15px 16px;margin:10px 0;box-shadow:0 4px 14px #17233308}
+.detail-box h3{margin:0 0 9px;font-size:13px;color:#20334a;display:flex;align-items:center;gap:8px}
+.detail-box h3:before{content:"";width:4px;height:16px;border-radius:5px;background:var(--accent);display:inline-block}
+.detail-box div{white-space:pre-wrap;line-height:2;color:#536174;font-size:13px;overflow-wrap:anywhere}
+.detail-close{width:100%;margin-top:8px}.about-modal{width:min(560px,100%)}.about-modal-logo{max-height:150px!important;max-width:180px;object-fit:contain!important;display:block;margin:18px auto!important;background:white!important}
+.about-copy{margin-top:16px}
+.logo-fallback,.logo{cursor:pointer}
+@media(max-width:520px){.detail-grid{grid-template-columns:1fr}.product-detail-modal{padding:15px}.product-detail-modal>img{max-height:240px}}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#122238;color:white;border-radius:12px;padding:12px 18px;z-index:30;font-size:13px;box-shadow:0 8px 25px #0002;max-width:90vw}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}.hero{grid-template-columns:1fr .35fr}.hero-art{font-size:55px}}
+@media(max-width:620px){header{padding:11px 12px}.top{gap:8px}.logo,.logo-fallback{width:41px;height:41px}.brand h1{font-size:16px}.brand p{font-size:10px}.header-btn{padding:9px 10px;font-size:11px}main{padding:14px 12px 45px}.hero{grid-template-columns:1fr;padding:24px 19px;border-radius:19px}.hero-art{display:none}.hero h2{font-size:26px}.hero p{font-size:13px}.hero-actions{margin-top:17px}.section-head{align-items:stretch;flex-direction:column;margin-top:25px}.tools{width:100%}.search{width:100%;flex:1}.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.product-body{padding:11px}.product h3{font-size:13px}.product .summary{font-size:11px;min-height:40px}.product-bottom{gap:6px}.product-bottom button{font-size:11px;padding:10px 3px}.about{grid-template-columns:1fr;gap:15px;padding:20px}.about-logo{width:86px;height:86px}.admin{padding:16px}.admin-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.manage-row{align-items:flex-start;flex-wrap:wrap}.manage-row .danger{padding:8px 7px}}
+@media(max-width:350px){.grid{grid-template-columns:1fr}.brand p{display:none}.header-btn{font-size:10px}}
+
+/* ---------- KTV polished visual layer ---------- */
+:root{--navy:#0d1b2a;--navy2:#1b3550;--silver:#dce5ef;--bg:#f4f7fb;--card:#fff;--ink:#142235;--muted:#64748b;--line:#e1e8f0;--accent:#e8ad43;--radius:20px}
+body{background:radial-gradient(ellipse at 80% 0%,#e8eef7 0,transparent 36%),var(--bg);font-family:"Vazirmatn","Estedad",Tahoma,sans-serif;letter-spacing:-.1px}
+header{background:linear-gradient(125deg,#0b1725 0%,#17334f 58%,#203e5c 100%);backdrop-filter:blur(12px)}
+.brand h1{font-family:"Estedad","Vazirmatn",sans-serif;font-weight:800;letter-spacing:0}
+.hero{background:linear-gradient(125deg,#101f31 0%,#1d3a57 65%,#2c4d6d 100%);box-shadow:0 18px 50px #142b441b;border:1px solid #ffffff10}
+.hero h2,.section-head h2,.about h2{font-family:"Estedad","Vazirmatn",sans-serif;font-weight:800;letter-spacing:-.5px}
+.primary{background:linear-gradient(135deg,#f0bd5b,#e4a332);box-shadow:0 6px 16px #d99a2b25;transition:transform .18s,filter .18s}
+.primary:hover{filter:brightness(1.04);transform:translateY(-1px)}
+.secondary,.outline,.header-btn,.info-btn{transition:transform .18s,box-shadow .18s,border-color .18s}
+.secondary:hover,.outline:hover,.info-btn:hover{transform:translateY(-1px);box-shadow:0 5px 16px #17233310}
+.search,.field input,.field textarea{font-family:"Vazirmatn","Estedad",sans-serif;border-radius:13px}
+.search{box-shadow:0 3px 10px #17233306}
+.grid{gap:18px}
+.product{border-radius:20px;box-shadow:0 5px 20px #15263b07}
+.product:hover{box-shadow:0 16px 34px #15263b14}
+.product-photo{background:linear-gradient(145deg,#f2f5f9,#e7edf4)}
+.product-body{padding:17px}
+.product h3{font-family:"Estedad","Vazirmatn",sans-serif;font-weight:800}
+.product-tag{font-weight:700}
+.about,.admin{box-shadow:0 10px 35px #15263b08;border-radius:22px}
+.admin summary{padding:5px 0;font-family:"Estedad","Vazirmatn",sans-serif}
+.field label{color:#46566b}
+.field input,.field textarea{background:#fbfcfe;border-color:#dbe3ed}
+.field input:focus,.field textarea:focus{background:white}
+.modal{border:1px solid #e5ebf3;box-shadow:0 24px 80px #06101f45}
+.detail-box{border-radius:17px}
+footer{background:linear-gradient(120deg,#0b1725,#1b3550)}
+/* Square bullets entered from the product editor */
+.square-lines{white-space:normal}
+.square-line{display:flex;align-items:flex-start;gap:9px;margin:3px 0;line-height:2}
+.square-mark{width:8px;height:8px;min-width:8px;border-radius:2px;background:var(--accent);margin-top:10px;box-shadow:0 0 0 3px #e8ad431c}
+.square-line-text{flex:1;min-width:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.square-editor-tools{display:flex;gap:8px;flex-wrap:wrap;margin-top:7px}
+.square-editor-tools button{border:1px solid #dce4ee;background:#f7f9fc;color:#20334a;border-radius:10px;padding:8px 11px;font-size:12px;font-weight:700}
+.square-editor-tools button:hover{border-color:#e8ad43;background:#fffaf0}
+.qr-modal{width:min(440px,100%);text-align:center}
+.qr-product-name{font-size:17px;font-weight:800;margin:9px 0 3px;overflow-wrap:anywhere}
+.qr-wrap{display:grid;place-items:center;padding:18px;background:#f6f8fb;border:1px solid #e3eaf2;border-radius:18px;margin:18px 0}
+.qr-wrap canvas,.qr-wrap img{max-width:100%;height:auto!important;image-rendering:pixelated}
+.qr-note{font-size:12px;color:var(--muted);line-height:1.9}
+.manage-row{background:linear-gradient(120deg,#fff,#fbfcfe)}
+.qr-btn{border:1px solid #d9e2ed;background:#eef4fa;color:#193b5c;border-radius:9px;padding:8px 10px;font-size:12px;font-weight:800}
+@media(max-width:620px){.grid{gap:11px}.product-body{padding:12px}.hero{box-shadow:0 10px 28px #142b4415}.square-editor-tools button{flex:1}}
+
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #e8ad4360;outline-offset:2px}
+</style>
+</head>
+<body>
+<header><div class="top">
+  <div class="brand"><div class="logo-fallback" id="logoFallback">KTV</div><img class="logo" id="headerLogo" alt="لوگوی شرکت"><div><h1 id="headerName">KTV | قطعات خودرو</h1><p>کاتالوگ محصولات شرکت</p></div></div>
+  <div class="top-spacer"></div><button type="button" class="header-btn" id="btnAbout">درباره ما</button>
+</div></header>
+<main>
+  <section class="hero">
+    <div><div class="eyebrow">KTV · AUTOMOTIVE PARTS</div><h2>قطعه مناسب، انتخاب مطمئن</h2><p>کاتالوگ قطعات خودرو؛ محصولات را ببینید و برای مشاهده مشخصات هر قطعه روی «اطلاعات» بزنید.</p><div class="hero-actions"><button type="button" class="primary" id="btnProducts">مشاهده محصولات ↓</button><button type="button" class="secondary" id="btnAbout2">آشنایی با شرکت</button></div></div>
+    <div class="hero-art" aria-hidden="true">⚙️</div>
+  </section>
+  <section id="productsSection">
+    <div class="section-head"><div><h2>محصولات ما</h2><p>برای دیدن مشخصات هر محصول، بخش اطلاعات را باز کنید.</p></div><div class="tools"><input class="search" id="search" type="search" placeholder="جستجوی نام قطعه..." autocomplete="off"></div></div>
+    <div class="grid" id="productGrid"></div>
+  </section>
+  <section class="about" id="aboutSection" style="display:none"><img class="about-logo" id="aboutLogo" alt="لوگوی شرکت" style="display:none"><div><h2 id="aboutName">درباره شرکت KTV</h2><p id="aboutText"></p></div></section>
+
+  <details class="admin" id="manageSection">
+    <summary>مدیریت کاتالوگ و اطلاعات شرکت</summary>
+
+    <div id="authLoading" style="color:var(--muted);font-size:13px;margin-top:16px">در حال بررسی وضعیت ورود…</div>
+
+    <!-- ورود مدیر -->
+    <form id="loginBox" class="login-box hidden" autocomplete="on">
+      <h3 style="margin:8px 0 14px;font-size:16px">ورود مدیر</h3>
+      <div class="field"><label for="loginEmail">ایمیل</label><input id="loginEmail" type="email" name="email" autocomplete="username" dir="ltr" required></div>
+      <div class="field"><label for="loginPass">رمز عبور</label><input id="loginPass" type="password" name="password" autocomplete="current-password" dir="ltr" required></div>
+      <button type="submit" class="primary" id="loginBtn">ورود</button>
+      <div class="form-msg" id="loginMsg" role="alert"></div>
+    </form>
+
+    <!-- حساب واردشده ولی غیرمدیر -->
+    <div id="notAdminBox" class="hidden">
+      <div class="admin-bar"><span>این حساب مجوز مدیریت ندارد: <b id="notAdminEmail"></b></span><button type="button" class="outline" id="logoutBtn2">خروج</button></div>
+    </div>
+
+    <!-- پنل مدیر -->
+    <div id="adminPanel" class="hidden">
+      <div class="admin-bar"><span>وارد شده به عنوان مدیر: <b id="adminEmail"></b></span><button type="button" class="outline" id="logoutBtn">خروج از حساب</button></div>
+
+      <h3 style="margin:22px 0 8px;font-size:16px" id="formTitle">افزودن محصول</h3>
+      <div class="admin-grid">
+        <div class="field full"><label for="productImage">عکس محصول</label><input type="file" id="productImage" accept="image/jpeg,image/png,image/webp"><img id="productPreview" class="preview" alt="پیش‌نمایش عکس"></div>
+        <div class="field"><label for="productName">نام محصول *</label><input id="productName" maxlength="200" placeholder="مثلاً فیلتر هوا"></div>
+        <div class="field"><label for="productCategory">دسته‌بندی (اختیاری)</label><input id="productCategory" maxlength="100" placeholder="مثلاً سیستم موتور"></div>
+        <div class="field"><label for="productGroup">گروه محصول</label><input id="productGroup" maxlength="150" placeholder="مثلاً سیستم تعلیق و جلوبندی"></div>
+        <div class="field full"><label for="suitableCars">مناسب برای چه خودروهایی؟</label><textarea id="suitableCars" maxlength="2000" placeholder="مثلاً پژو ۲۰۶، ۲۰۷ و رانا؛ هر خودرو را در یک خط وارد کنید."></textarea></div>
+        <div class="field full"><label for="productInfo">توضیحات و مشخصات محصول</label><textarea id="productInfo" maxlength="5000" placeholder="توضیحات محصول، شماره فنی، جنس، ویژگی‌ها و نکات نصب..."></textarea></div><div class="field full"><div class="square-editor-tools"><button type="button" id="insertSquareBtn">□ افزودن مربع به ابتدای خط</button><button type="button" id="insertSquareNewLineBtn">□ افزودن خط جدید با مربع</button></div><small style="color:var(--muted);line-height:1.8">برای مرتب‌کردن مشخصات، نشانگر را روی خط دلخواه بگذار و دکمه را بزن.</small></div>
+      </div>
+      <div class="admin-actions"><button type="button" class="primary" id="saveProductBtn">ذخیره محصول</button><button type="button" class="outline" id="resetProductBtn">پاک کردن فرم</button></div>
+      <div id="manageList" class="manage-list"></div>
+
+      <hr style="border:0;border-top:1px solid var(--line);margin:24px 0">
+      <h3 style="font-size:16px;margin-bottom:14px">اطلاعات شرکت و لوگو</h3>
+      <div class="admin-grid">
+        <div class="field"><label for="companyName">نام شرکت</label><input id="companyName" maxlength="150" placeholder="نام شرکت"></div>
+        <div class="field"><label for="companyLogo">لوگوی شرکت</label><input type="file" id="companyLogo" accept="image/jpeg,image/png,image/webp"></div>
+        <div class="field full"><label for="companyInfo">درباره ما</label><textarea id="companyInfo" maxlength="5000" placeholder="معرفی شرکت، سابقه، زمینه فعالیت و راه‌های ارتباطی..."></textarea></div>
+      </div>
+      <div class="admin-actions"><button type="button" class="primary" id="saveCompanyBtn">ذخیره اطلاعات شرکت</button></div>
+    </div>
+  </details>
+</main>
+<footer><b id="footerName">KTV</b> · کاتالوگ قطعات خودرو</footer>
+<div id="modalRoot"></div><div id="toastRoot"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------- تنظیمات Supabase (فقط کلید عمومی Publishable) ---------- */
+  var SUPABASE_URL = 'https://pgbcnlwdwvmpwpuatvaa.supabase.co';
+  var SUPABASE_KEY = 'sb_publishable_BznPlONgtjQGfQEllw49_w_AhprjliB';
+  var BUCKET = 'product-images';
+  var DEFAULT_NAME = 'KTV | قطعات خودرو';
+  var DEFAULT_INFO = 'اطلاعاتی برای شرکت ثبت نشده است.';
+  var MAX_FILE = 8 * 1024 * 1024;
+
+  var $ = function (id) { return document.getElementById(id); };
+  var placeholder = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="500" height="400"><rect width="100%" height="100%" fill="#e9edf2"/><text x="50%" y="48%" dominant-baseline="middle" text-anchor="middle" font-size="62" fill="#aab4c1">⚙</text><text x="50%" y="67%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="#8793a2">تصویر محصول</text></svg>');
+
+  /* ---------- حالت برنامه ---------- */
+  var sb = null;
+  var products = [];
+  var productsState = 'loading'; // loading | error | ok
+  var company = { name: DEFAULT_NAME, info: '', logo: '' };
+  var settingsId = null;
+  var currentUser = null;
+  var isAdmin = false;
+  var editingId = null;
+  var editingImageUrl = '';
+  var pendingProductFile = null;
+  var pendingLogoFile = null;
+  var busy = false;
+  var toastTimer = null;
+
+  /* ---------- ابزارها ---------- */
+  function escapeHtml(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  function renderDescription(value) {
+    var text = String(value == null ? '' : value);
+    var lines = text.split(/\r?\n/);
+    return '<div class="square-lines">' + lines.map(function (line) {
+      var trimmed = line.trim();
+      if (/^(□|▪|■|▢|◻)\s*/.test(trimmed)) {
+        var content = trimmed.replace(/^(□|▪|■|▢|◻)\s*/, '');
+        return '<div class="square-line"><span class="square-mark" aria-hidden="true"></span><span class="square-line-text">' + escapeHtml(content) + '</span></div>';
+      }
+      return '<div class="square-line"><span class="square-line-text">' + (escapeHtml(line) || '&nbsp;') + '</span></div>';
+    }).join('') + '</div>';
+  }
+  function insertSquareBullet() {
+    var area = $('productInfo');
+    var start = area.selectionStart, end = area.selectionEnd, value = area.value;
+    var lineStart = value.lastIndexOf('\n', Math.max(0, start - 1)) + 1;
+    var lineEnd = value.indexOf('\n', start);
+    if (lineEnd < 0) lineEnd = value.length;
+    var line = value.slice(lineStart, lineEnd);
+    if (/^\s*[□▪■▢◻]\s*/.test(line)) {
+      toast('این خط از قبل علامت مربع دارد.');
+      area.focus(); return;
+    }
+    var prefix = '□ ';
+    area.value = value.slice(0, lineStart) + prefix + value.slice(lineStart);
+    area.focus();
+    var pos = start + prefix.length;
+    area.setSelectionRange(pos, end + prefix.length);
+  }
+  function productPublicUrl(id) {
+    if (!/^https?:$/.test(window.location.protocol)) return '';
+    var u = new URL(window.location.href);
+    u.searchParams.set('product', String(id));
+    u.hash = '';
+    return u.href;
+  }
+  function showQr(id) {
+    var p = products.find(function (x) { return String(x.id) === String(id); });
+    if (!p) return;
+    var url = productPublicUrl(p.id);
+    if (!url) {
+      toast('برای ساخت QR قابل اسکن، ابتدا فایل را روی یک آدرس عمومی HTTPS منتشر کن.');
+      return;
+    }
+    $('modalRoot').innerHTML = '<div class="overlay" id="overlay"><div class="modal qr-modal" role="dialog" aria-modal="true" aria-label="QR محصول">' +
+      '<div class="modal-head"><span class="detail-kicker">KTV · PRODUCT QR</span><button type="button" class="close" id="closeModalBtn" aria-label="بستن">×</button></div>' +
+      '<div class="qr-product-name">' + escapeHtml(p.name) + '</div><div class="qr-note">با اسکن این کد، صفحه مشخصات همین محصول باز می‌شود.</div>' +
+      '<div class="qr-wrap"><div id="qrCodeCanvas"></div></div>' +
+      '<button type="button" class="primary" id="downloadQrBtn">دانلود QR برای چاپ</button>' +
+      '<p class="qr-note" style="direction:ltr;overflow-wrap:anywhere">' + escapeHtml(url) + '</p></div></div>';
+    var qrBox = $('qrCodeCanvas');
+    if (window.QRCode) {
+      new QRCode(qrBox, { text: url, width: 240, height: 240, colorDark: '#10243a', colorLight: '#ffffff', correctLevel: QRCode.CorrectLevel.H });
+    } else {
+      qrBox.textContent = 'کتابخانه ساخت QR بارگذاری نشد؛ اتصال اینترنت را بررسی کن.';
+    }
+    $('downloadQrBtn').addEventListener('click', function () {
+      var canvas = qrBox.querySelector('canvas');
+      var img = qrBox.querySelector('img');
+      var data = canvas ? canvas.toDataURL('image/png') : (img ? img.src : '');
+      if (!data) { toast('QR هنوز آماده نیست.'); return; }
+      var a = document.createElement('a');
+      a.href = data;
+      a.download = 'KTV-QR-' + String(p.name).replace(/[^a-zA-Z0-9آ-ی_-]+/g, '-') + '.png';
+      document.body.appendChild(a); a.click(); a.remove();
+    });
+  }
+
+  function safeUrl(u) { return /^https:\/\//i.test(u || '') ? u : ''; }
+  function toast(msg) {
+    $('toastRoot').innerHTML = '<div class="toast">' + escapeHtml(msg) + '</div>';
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { $('toastRoot').innerHTML = ''; }, 3200);
+  }
+  function errText(e) {
+    var m = (e && e.message) ? String(e.message) : '';
+    if (/row-level security|permission denied|not authorized|unauthorized/i.test(m)) return 'دسترسی مجاز نیست (سیاست‌های امنیتی Supabase).';
+    if (/Failed to fetch|NetworkError|network/i.test(m)) return 'ارتباط با سرور برقرار نشد. اینترنت را بررسی کنید.';
+    return m || 'خطای نامشخص';
+  }
+  function scrollTo(id) { var el = $(id); if (el) el.scrollIntoView({ behavior: 'smooth' }); }
+  function setBusy(v) {
+    busy = v;
+    ['saveProductBtn', 'resetProductBtn', 'saveCompanyBtn', 'loginBtn'].forEach(function (id) { var b = $(id); if (b) b.disabled = v; });
+  }
+
+  /* ---------- فشرده‌سازی و بارگذاری تصویر ---------- */
+  var EXT = { 'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp' };
+  function compressImage(file, maxDim) {
+    return new Promise(function (resolve) {
+      var type = EXT[file.type] ? file.type : 'image/jpeg';
+      var url = URL.createObjectURL(file);
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var w = img.naturalWidth, h = img.naturalHeight;
+          var scale = Math.min(1, maxDim / Math.max(w, h));
+          if (scale === 1 && file.size < 1500000) { URL.revokeObjectURL(url); return resolve({ blob: file, type: file.type }); }
+          var c = document.createElement('canvas');
+          c.width = Math.round(w * scale); c.height = Math.round(h * scale);
+          var ctx = c.getContext('2d');
+          if (type === 'image/jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, c.width, c.height); }
+          ctx.drawImage(img, 0, 0, c.width, c.height);
+          c.toBlob(function (b) {
+            URL.revokeObjectURL(url);
+            if (b && b.size < file.size) resolve({ blob: b, type: type }); else resolve({ blob: file, type: file.type });
+          }, type, 0.86);
+        } catch (e) { URL.revokeObjectURL(url); resolve({ blob: file, type: file.type }); }
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); resolve({ blob: file, type: file.type }); };
+      img.src = url;
+    });
+  }
+  function checkImageFile(file) {
+    if (!file) return false;
+    if (!EXT[file.type]) { toast('فقط تصویر JPG، PNG یا WebP مجاز است.'); return false; }
+    if (file.size > MAX_FILE) { toast('حجم تصویر باید کمتر از ۸ مگابایت باشد.'); return false; }
+    return true;
+  }
+  function uuid() {
+    if (window.crypto && crypto.randomUUID) return crypto.randomUUID();
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
+  }
+  async function uploadImage(file, folder) {
+    var r = await compressImage(file, 1600);
+    var ext = EXT[r.type] || 'jpg';
+    var path = folder + '/' + uuid() + '.' + ext;
+    var up = await sb.storage.from(BUCKET).upload(path, r.blob, { contentType: r.type, cacheControl: '31536000', upsert: false });
+    if (up.error) throw up.error;
+    var pub = sb.storage.from(BUCKET).getPublicUrl(path);
+    return { url: pub.data.publicUrl, path: path };
+  }
+  function pathFromUrl(url) {
+    var marker = '/object/public/' + BUCKET + '/';
+    var i = (url || '').indexOf(marker);
+    if (i < 0) return '';
+    try { return decodeURIComponent(url.slice(i + marker.length).split('?')[0]); } catch (e) { return ''; }
+  }
+  async function removeImageByUrl(url) {
+    var p = pathFromUrl(url);
+    if (!p) return;
+    try { await sb.storage.from(BUCKET).remove([p]); } catch (e) { /* حذف عکس قدیمی اختیاری است */ }
+  }
+
+  /* ---------- نمایش اطلاعات شرکت ---------- */
+  function applyCompany() {
+    var name = company.name || DEFAULT_NAME;
+    var logo = safeUrl(company.logo);
+    $('headerName').textContent = name;
+    $('aboutName').textContent = 'درباره ' + name;
+    $('aboutText').textContent = company.info || DEFAULT_INFO;
+    $('footerName').textContent = name;
+    document.title = name + ' | کاتالوگ قطعات خودرو';
+    if (logo) {
+      $('headerLogo').src = logo; $('headerLogo').style.display = 'block'; $('logoFallback').style.display = 'none';
+      $('aboutLogo').src = logo; $('aboutLogo').style.display = 'block';
+    } else {
+      $('headerLogo').style.display = 'none'; $('logoFallback').style.display = 'grid'; $('aboutLogo').style.display = 'none';
+    }
+  }
+
+  /* ---------- نمایش محصولات ---------- */
+  function renderProducts() {
+    var grid = $('productGrid');
+    if (productsState === 'loading') {
+      grid.innerHTML = '<div class="empty"><div class="spinner"></div>در حال بارگذاری محصولات…</div>';
+      return;
+    }
+    if (productsState === 'error') {
+      grid.innerHTML = '<div class="empty">بارگذاری محصولات انجام نشد.<br><button type="button" class="primary" id="retryBtn" style="margin-top:12px">تلاش دوباره</button></div>';
+      return;
+    }
+    var q = $('search').value.trim().toLowerCase();
+    var list = products.filter(function (p) {
+      return (p.name + ' ' + (p.category || '') + ' ' + (p.product_group || '') + ' ' + (p.suitable_cars || '') + ' ' + (p.info || '')).toLowerCase().indexOf(q) !== -1;
+    });
+    if (!list.length) {
+      grid.innerHTML = '<div class="empty">' + (products.length ? 'محصولی با این عبارت پیدا نشد.' : 'هنوز محصولی ثبت نشده است.') + '</div>';
+      return;
+    }
+    grid.innerHTML = list.map(function (p) {
+      var info = p.info || '';
+      var img = safeUrl(p.image_url) || placeholder;
+      return '<article class="product"><div class="product-photo"><img loading="lazy" src="' + escapeHtml(img) + '" alt="' + escapeHtml(p.name) + '"></div>' +
+        '<div class="product-body"><span class="product-tag">' + escapeHtml(p.category || 'قطعات خودرو') + '</span>' +
+        '<h3>' + escapeHtml(p.name) + '</h3>' +
+        '<div class="summary">' + escapeHtml((p.product_group ? p.product_group + ' · ' : '') + (info ? info.slice(0, 75) + (info.length > 75 ? '…' : '') : (p.suitable_cars ? 'مناسب برای: ' + p.suitable_cars : 'برای مشاهده مشخصات بیشتر روی اطلاعات بزنید.'))) + '</div>' +
+        '<div class="product-bottom"><button type="button" class="info-btn" data-info="' + escapeHtml(p.id) + '">اطلاعات محصول</button></div></div></article>';
+    }).join('');
+  }
+  function renderManage() {
+    var box = $('manageList');
+    if (!isAdmin) { box.innerHTML = ''; return; }
+    box.innerHTML = products.length
+      ? '<h3 style="font-size:14px;margin:18px 0 6px">محصولات ثبت‌شده</h3>' + products.map(function (p) {
+        return '<div class="manage-row"><img src="' + escapeHtml(safeUrl(p.image_url) || placeholder) + '" alt=""><div class="grow"><b>' + escapeHtml(p.name) + '</b><small>' + escapeHtml(p.category || 'قطعات خودرو') + '</small></div>' +
+          '<button type="button" class="qr-btn" data-qr="' + escapeHtml(p.id) + '">QR کد</button><button type="button" class="outline" data-edit="' + escapeHtml(p.id) + '">ویرایش</button><button type="button" class="danger" data-del="' + escapeHtml(p.id) + '">حذف</button></div>';
+      }).join('')
+      : '<p style="color:var(--muted);font-size:12px">هنوز محصولی برای مدیریت وجود ندارد.</p>';
+  }
+  function showInfo(id) {
+    var p = products.find(function (x) { return x.id === id; });
+    if (!p) return;
+    var img = safeUrl(p.image_url) || placeholder;
+    var cars = (p.suitable_cars || '').trim();
+    var group = (p.product_group || '').trim();
+    var info = (p.info || '').trim();
+    function detailBox(title, value, fallback) {
+      if (!value) value = fallback || 'ثبت نشده است.';
+      return '<section class="detail-box"><h3>' + escapeHtml(title) + '</h3>' + renderDescription(value) + '</section>';
+    }
+    $('modalRoot').innerHTML = '<div class="overlay" id="overlay"><div class="modal product-detail-modal" role="dialog" aria-modal="true" aria-label="مشخصات محصول"><div class="modal-head"><div><span class="detail-kicker">KTV · مشخصات محصول</span><h2>' + escapeHtml(p.name) + '</h2></div><button type="button" class="close" id="closeModalBtn" aria-label="بستن">×</button></div>' +
+      '<img src="' + escapeHtml(img) + '" alt="' + escapeHtml(p.name) + '"><div class="detail-tags"><span class="product-tag">' + escapeHtml(p.category || 'قطعات خودرو') + '</span>' + (group ? '<span class="product-tag group-tag">' + escapeHtml(group) + '</span>' : '') + '</div>' +
+      '<div class="detail-grid">' + detailBox('گروه محصول', group) + detailBox('مناسب برای خودروهای', cars, 'خودروی سازگار ثبت نشده است.') + '</div>' +
+      detailBox('توضیحات و مشخصات فنی', info, 'برای این محصول توضیحات بیشتری ثبت نشده است.') +
+      '<button type="button" class="primary detail-close" id="closeModalBtn2">بستن</button></div></div>';
+  }
+  function showAbout() {
+    var name = company.name || DEFAULT_NAME;
+    var logo = safeUrl(company.logo);
+    $('modalRoot').innerHTML = '<div class="overlay" id="overlay"><div class="modal about-modal" role="dialog" aria-modal="true" aria-label="درباره شرکت"><div class="modal-head"><h2>درباره ' + escapeHtml(name) + '</h2><button type="button" class="close" id="closeModalBtn" aria-label="بستن">×</button></div>' +
+      (logo ? '<img class="about-modal-logo" src="' + escapeHtml(logo) + '" alt="لوگوی شرکت">' : '') +
+      '<section class="detail-box about-copy"><h3>معرفی شرکت</h3><div>' + escapeHtml(company.info || DEFAULT_INFO) + '</div></section><button type="button" class="primary detail-close" id="closeModalBtn2">متوجه شدم</button></div></div>';
+  }
+  function closeModal() { $('modalRoot').innerHTML = ''; }
+
+  /* ---------- بارگذاری داده‌ها ---------- */
+  async function loadProducts() {
+    productsState = 'loading'; renderProducts();
+    var r = await sb.from('products').select('id,name,category,product_group,suitable_cars,info,image_url,created_at,updated_at').order('created_at', { ascending: false });
+    if (r.error) { console.error('products:', r.error); productsState = 'error'; products = []; }
+    else { products = r.data || []; productsState = 'ok'; }
+    renderProducts(); renderManage();
+    var requestedProduct = new URLSearchParams(window.location.search).get('product');
+    if (requestedProduct && productsState === 'ok') {
+      var match = products.find(function (p) { return String(p.id) === String(requestedProduct); });
+      if (match) showInfo(match.id);
+      else toast('این محصول پیدا نشد یا حذف شده است.');
+    }
+  }
+  async function loadCompany() {
+    // این پروژه برای اطلاعات شرکت از ردیف ثابت با شناسه متنی 'main' استفاده می‌کند.
+    var r = await sb.from('site_settings')
+      .select('id,company_name,company_info,logo_url')
+      .eq('id', 'main')
+      .maybeSingle();
+    if (r.error) { console.error('site_settings:', r.error); applyCompany(); return; }
+    var row = r.data;
+    if (row) {
+      settingsId = 'main';
+      company = { name: row.company_name || DEFAULT_NAME, info: row.company_info || '', logo: row.logo_url || '' };
+    } else {
+      settingsId = 'main';
+      console.warn('ردیف site_settings با id=main پیدا نشد. ذخیره‌سازی فقط به‌روزرسانی همین ردیف را امتحان می‌کند.');
+    }
+    applyCompany(); fillCompanyForm();
+  }
+  function fillCompanyForm() {
+    $('companyName').value = company.name || '';
+    $('companyInfo').value = company.info || '';
+  }
+
+  /* ---------- احراز هویت مدیر ---------- */
+  function renderAuth(state, email) {
+    ['authLoading', 'loginBox', 'notAdminBox', 'adminPanel'].forEach(function (id) { $(id).classList.add('hidden'); });
+    if (state === 'loading') $('authLoading').classList.remove('hidden');
+    else if (state === 'login') $('loginBox').classList.remove('hidden');
+    else if (state === 'notadmin') { $('notAdminEmail').textContent = email || ''; $('notAdminBox').classList.remove('hidden'); }
+    else if (state === 'admin') { $('adminEmail').textContent = email || ''; $('adminPanel').classList.remove('hidden'); }
+  }
+  async function applySession(session) {
+    currentUser = session && session.user ? session.user : null;
+    isAdmin = false;
+    if (!currentUser) { renderAuth('login'); renderManage(); return; }
+    renderAuth('loading');
+    var r = await sb.from('admin_users').select('user_id').eq('user_id', currentUser.id).maybeSingle();
+    if (r.error) { console.error('admin_users:', r.error); toast('بررسی مجوز مدیر انجام نشد: ' + errText(r.error)); renderAuth('notadmin', currentUser.email); return; }
+    isAdmin = !!r.data;
+    renderAuth(isAdmin ? 'admin' : 'notadmin', currentUser.email);
+    if (isAdmin) fillCompanyForm();
+    renderManage();
+  }
+  async function login(ev) {
+    ev.preventDefault();
+    var msg = $('loginMsg'); msg.className = 'form-msg'; msg.textContent = '';
+    var email = $('loginEmail').value.trim(), pass = $('loginPass').value;
+    if (!email || !pass) { msg.textContent = 'ایمیل و رمز عبور را وارد کنید.'; return; }
+    setBusy(true);
+    try {
+      var r = await sb.auth.signInWithPassword({ email: email, password: pass });
+      if (r.error) throw r.error;
+      $('loginPass').value = '';
+    } catch (e) {
+      msg.textContent = /invalid login/i.test(e.message || '') ? 'ایمیل یا رمز عبور اشتباه است.' : 'ورود انجام نشد: ' + errText(e);
+    } finally { setBusy(false); }
+  }
+  async function logout() {
+    var r = await sb.auth.signOut();
+    if (r.error) toast('خروج انجام نشد: ' + errText(r.error));
+  }
+
+  /* ---------- مدیریت محصولات ---------- */
+  function resetProductForm() {
+    editingId = null; editingImageUrl = ''; pendingProductFile = null;
+    $('productName').value = ''; $('productCategory').value = ''; $('productGroup').value = ''; $('suitableCars').value = ''; $('productInfo').value = '';
+    $('productImage').value = ''; $('productPreview').style.display = 'none'; $('productPreview').removeAttribute('src');
+    $('formTitle').textContent = 'افزودن محصول';
+  }
+  async function saveProduct() {
+    if (busy) return;
+    if (!isAdmin) { toast('دسترسی مدیر لازم است.'); return; }
+    var name = $('productName').value.trim();
+    if (!name) { toast('لطفاً نام محصول را وارد کنید.'); return; }
+    setBusy(true);
+    var uploaded = null;
+    try {
+      var imageUrl = editingImageUrl;
+      if (pendingProductFile) { uploaded = await uploadImage(pendingProductFile, 'products'); imageUrl = uploaded.url; }
+      var payload = { name: name, category: $('productCategory').value.trim() || 'قطعات خودرو', product_group: $('productGroup').value.trim() || null, suitable_cars: $('suitableCars').value.trim() || null, info: $('productInfo').value.trim() || null, image_url: imageUrl || null };
+      if (editingId) {
+        payload.updated_at = new Date().toISOString();
+        var u = await sb.from('products').update(payload).eq('id', editingId).select('id');
+        if (u.error) throw u.error;
+        if (!u.data || !u.data.length) throw new Error('ویرایش انجام نشد (دسترسی یا شناسه نامعتبر).');
+        if (uploaded && editingImageUrl) removeImageByUrl(editingImageUrl);
+      } else {
+        var i = await sb.from('products').insert(payload).select('id');
+        if (i.error) throw i.error;
+      }
+      resetProductForm();
+      await loadProducts();
+      toast('محصول ذخیره شد.');
+    } catch (e) {
+      console.error(e);
+      if (uploaded) removeImageByUrl(uploaded.url);
+      toast('ذخیره نشد: ' + errText(e));
+    } finally { setBusy(false); }
+  }
+  function editProduct(id) {
+    var p = products.find(function (x) { return x.id === id; });
+    if (!p) return;
+    editingId = id; editingImageUrl = p.image_url || ''; pendingProductFile = null;
+    $('productName').value = p.name || ''; $('productCategory').value = p.category || ''; $('productGroup').value = p.product_group || ''; $('suitableCars').value = p.suitable_cars || ''; $('productInfo').value = p.info || '';
+    $('productImage').value = '';
+    var img = safeUrl(p.image_url);
+    if (img) { $('productPreview').src = img; $('productPreview').style.display = 'block'; } else { $('productPreview').style.display = 'none'; }
+    $('formTitle').textContent = 'ویرایش محصول';
+    $('manageSection').open = true; $('productName').focus();
+    scrollTo('formTitle');
+  }
+  async function deleteProduct(id) {
+    if (busy || !isAdmin) return;
+    var p = products.find(function (x) { return x.id === id; });
+    if (!p || !confirm('محصول «' + p.name + '» حذف شود؟')) return;
+    setBusy(true);
+    try {
+      var r = await sb.from('products').delete().eq('id', id).select('id');
+      if (r.error) throw r.error;
+      if (!r.data || !r.data.length) throw new Error('حذف انجام نشد (دسترسی مجاز نیست).');
+      removeImageByUrl(p.image_url);
+      if (editingId === id) resetProductForm();
+      await loadProducts();
+      toast('محصول حذف شد.');
+    } catch (e) { console.error(e); toast('حذف نشد: ' + errText(e)); }
+    finally { setBusy(false); }
+  }
+
+  /* ---------- تنظیمات شرکت ---------- */
+  async function saveCompany() {
+    if (busy) return;
+    if (!isAdmin) { toast('دسترسی مدیر لازم است.'); return; }
+    setBusy(true);
+    var uploaded = null;
+    try {
+      var logoUrl = company.logo || '';
+      if (pendingLogoFile) { uploaded = await uploadImage(pendingLogoFile, 'logo'); logoUrl = uploaded.url; }
+      var payload = {
+        company_name: $('companyName').value.trim() || DEFAULT_NAME,
+        company_info: $('companyInfo').value.trim() || null,
+        logo_url: logoUrl || null,
+        updated_at: new Date().toISOString()
+      };
+      // شناسه جدول text است و ردیف موجود 'main' نام دارد؛ هرگز ردیف جدید نساز.
+      var r = await sb.from('site_settings')
+        .update(payload)
+        .eq('id', 'main')
+        .select('id');
+      if (r.error) throw r.error;
+      if (!r.data || !r.data.length) {
+        throw new Error('ردیف main پیدا نشد یا مجوز UPDATE ندارید. در Supabase وجود ردیف id=main و سیاست UPDATE مدیر را بررسی کنید.');
+      }
+      settingsId = 'main';
+      var oldLogo = company.logo;
+      company = { name: payload.company_name, info: payload.company_info || '', logo: logoUrl };
+      if (uploaded && oldLogo) removeImageByUrl(oldLogo);
+      pendingLogoFile = null; $('companyLogo').value = '';
+      applyCompany(); fillCompanyForm();
+      toast('اطلاعات شرکت ذخیره شد.');
+    } catch (e) {
+      console.error(e);
+      if (uploaded) removeImageByUrl(uploaded.url);
+      toast('ذخیره نشد: ' + errText(e));
+    } finally { setBusy(false); }
+  }
+
+  /* ---------- رویدادها ---------- */
+  function bindEvents() {
+    $('btnAbout').addEventListener('click', showAbout);
+    $('btnAbout2').addEventListener('click', showAbout);
+    $('btnProducts').addEventListener('click', function () { scrollTo('productsSection'); });
+    var logoClicks = 0, logoTimer = null;
+    function hiddenAdminClick() {
+      logoClicks += 1;
+      if (logoTimer) clearTimeout(logoTimer);
+      logoTimer = setTimeout(function () { logoClicks = 0; }, 2200);
+      if (logoClicks >= 5) {
+        logoClicks = 0;
+        var panel = $('manageSection');
+        panel.classList.add('admin-revealed');
+        panel.open = true;
+        scrollTo('manageSection');
+        setTimeout(function () { var login = $('loginEmail'); if (login && !login.closest('.hidden')) login.focus(); }, 250);
+      }
+    }
+    $('logoFallback').addEventListener('click', hiddenAdminClick);
+    $('headerLogo').addEventListener('click', hiddenAdminClick);
+    $('search').addEventListener('input', renderProducts);
+    $('productGrid').addEventListener('click', function (e) {
+      var b = e.target.closest('[data-info]'); if (b) { showInfo(b.getAttribute('data-info')); return; }
+      if (e.target.closest('#retryBtn')) { loadProducts(); return; }
+      var card = e.target.closest('.product'); if (card) { var i = card.querySelector('[data-info]'); if (i) showInfo(i.getAttribute('data-info')); }
+    });
+    $('modalRoot').addEventListener('click', function (e) {
+      if (e.target.id === 'overlay' || e.target.id === 'closeModalBtn' || e.target.id === 'closeModalBtn2') closeModal();
+    });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeModal(); });
+    $('manageList').addEventListener('click', function (e) {
+      var qr = e.target.closest('[data-qr]'); if (qr) { showQr(qr.getAttribute('data-qr')); return; }
+      var ed = e.target.closest('[data-edit]'); if (ed) { editProduct(ed.getAttribute('data-edit')); return; }
+      var dl = e.target.closest('[data-del]'); if (dl) deleteProduct(dl.getAttribute('data-del'));
+    });
+    $('loginBox').addEventListener('submit', login);
+    $('logoutBtn').addEventListener('click', logout);
+    $('logoutBtn2').addEventListener('click', logout);
+    $('saveProductBtn').addEventListener('click', saveProduct);
+    $('resetProductBtn').addEventListener('click', resetProductForm);
+    $('saveCompanyBtn').addEventListener('click', saveCompany);
+    $('insertSquareBtn').addEventListener('click', insertSquareBullet);
+    $('insertSquareNewLineBtn').addEventListener('click', function () {
+      var area = $('productInfo');
+      var value = area.value;
+      if (value && !value.endsWith('\n')) value += '\n';
+      area.value = value + '□ ';
+      area.focus();
+      area.setSelectionRange(area.value.length, area.value.length);
+    });
+    $('productImage').addEventListener('change', function (e) {
+      var f = e.target.files[0];
+      if (!f) { pendingProductFile = null; return; }
+      if (!checkImageFile(f)) { e.target.value = ''; pendingProductFile = null; return; }
+      pendingProductFile = f;
+      $('productPreview').src = URL.createObjectURL(f); $('productPreview').style.display = 'block';
+    });
+    $('companyLogo').addEventListener('change', function (e) {
+      var f = e.target.files[0];
+      if (!f) { pendingLogoFile = null; return; }
+      if (!checkImageFile(f)) { e.target.value = ''; pendingLogoFile = null; return; }
+      pendingLogoFile = f;
+      toast('لوگو انتخاب شد؛ برای ثبت روی «ذخیره اطلاعات شرکت» بزنید.');
+    });
+  }
+
+  /* ---------- شروع ---------- */
+  async function init() {
+    bindEvents();
+    applyCompany();
+    renderProducts();
+    if (!window.supabase || !window.supabase.createClient) {
+      productsState = 'error'; renderProducts();
+      $('productGrid').innerHTML = '<div class="empty">کتابخانه Supabase بارگذاری نشد. اتصال اینترنت را بررسی و صفحه را دوباره باز کنید.</div>';
+      renderAuth('login');
+      return;
+    }
+    sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false } });
+
+    // تغییرات بعدی نشست (ورود/خروج). فراخوانی‌های Supabase بیرون از callback انجام می‌شوند.
+    sb.auth.onAuthStateChange(function (event, session) {
+      if (event === 'INITIAL_SESSION') return;
+      setTimeout(function () { applySession(session); }, 0);
+    });
+
+    loadCompany();
+    loadProducts();
+    var s = await sb.auth.getSession();
+    await applySession(s && s.data ? s.data.session : null);
+  }
+  init();
+})();
+</script>
+</body>
+</html>
