@@ -26,7 +26,9 @@ footer{background:var(--navy);color:#d0d8e2;padding:25px 18px;text-align:center;
 .detail-kicker{display:block;color:#a9781d;font-size:10px;font-weight:800;margin-bottom:5px;letter-spacing:.4px}
 .product-detail-modal{width:min(680px,100%);border:1px solid #e8edf3;box-shadow:0 24px 80px #06101f55}
 .product-detail-modal>img{max-height:320px;margin:18px 0;background:linear-gradient(135deg,#f7f9fc,#edf1f6);padding:10px}
-.product-gallery{position:relative;margin:0 0 18px}.gallery-frame{height:clamp(220px,42vw,360px);position:relative;display:grid;place-items:center;background:linear-gradient(135deg,#f7f9fc,#edf1f6);border:1px solid var(--line);border-radius:16px;overflow:hidden}.gallery-frame img{width:100%;height:100%;object-fit:contain;margin:0;padding:12px;background:transparent;border-radius:0}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:38px;height:38px;border:1px solid #dce3eb;border-radius:50%;background:#ffffffed;color:#172333;font-size:24px;display:grid;place-items:center;z-index:2}.gallery-prev{right:10px}.gallery-next{left:10px}.gallery-dots{display:flex;justify-content:center;gap:7px;margin:11px 0 0}.gallery-dot{width:8px;height:8px;padding:0;border:0;border-radius:50%;background:#c5ced9}.gallery-dot.active{background:var(--accent);transform:scale(1.25)}.gallery-count{text-align:center;color:var(--muted);font-size:11px;margin-top:5px}
+.product-gallery{position:relative;margin:12px 0 20px;padding:10px;background:linear-gradient(145deg,#f9fafc,#eef2f7);border:1px solid #e2e8f0;border-radius:22px;box-shadow:0 12px 30px #1723330b}.gallery-frame{height:clamp(250px,48vw,390px);position:relative;display:grid;place-items:center;background:radial-gradient(ellipse at center,#fff 0%,#f8fafc 64%,#edf1f6 100%);border:1px solid #e8edf3;border-radius:16px;overflow:hidden;touch-action:pan-y;user-select:none;-webkit-user-select:none}.gallery-frame img{width:100%;height:100%;object-fit:contain;margin:0;padding:clamp(12px,3vw,26px);background:transparent;border-radius:0;pointer-events:none;transition:opacity .15s ease}.gallery-arrow{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border:1px solid #dce3eb;border-radius:50%;background:#ffffffed;color:#172333;font-size:25px;display:grid;place-items:center;z-index:2;box-shadow:0 4px 14px #17233314;transition:transform .15s,background .15s}.gallery-arrow:active{transform:translateY(-50%) scale(.94);background:#fff}.gallery-prev{right:12px}.gallery-next{left:12px}.gallery-dots{display:flex;justify-content:center;align-items:center;gap:7px;margin:13px 0 8px;flex-wrap:wrap}.gallery-dot{width:7px;height:7px;padding:0;border:0;border-radius:20px;background:#c5ced9;transition:width .2s,background .2s}.gallery-dot.active{width:22px;background:var(--accent)}.gallery-meta{display:flex;align-items:center;justify-content:center;gap:9px;color:var(--muted);font-size:11px}.gallery-count{font-variant-numeric:tabular-nums}.gallery-swipe-hint{display:inline-flex;align-items:center;gap:5px;background:#fff;border:1px solid #e2e8f0;border-radius:20px;padding:4px 9px;color:#657286;font-size:10px}.gallery-swipe-hint span{font-size:14px;color:#9a6b17}
+@media(max-width:520px){.overlay{padding:8px;align-items:center}.product-detail-modal{width:100%;max-height:94dvh;border-radius:22px;padding:14px;overscroll-behavior:contain}.product-detail-modal .modal-head{position:sticky;top:-14px;background:#fff;z-index:4;padding:5px 0 10px}.product-gallery{margin:8px -2px 16px;padding:7px;border-radius:18px}.gallery-frame{height:min(48dvh,390px);min-height:250px;border-radius:13px}.gallery-frame img{padding:12px}.gallery-arrow{width:35px;height:35px;font-size:22px}.gallery-prev{right:8px}.gallery-next{left:8px}.product-detail-modal>img{max-height:230px}}
+
 .preview-list{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}.preview-item{position:relative;width:88px}.preview-list img{width:88px;height:82px;object-fit:contain;background:#eef1f5;border-radius:10px;border:1px solid var(--line);padding:3px;display:block}.preview-remove{width:100%;margin-top:4px;border:1px solid #efc8c8;background:#fff4f4;color:#a32e2e;border-radius:8px;padding:5px 3px;font-size:10px}
 .detail-tags{display:flex;flex-wrap:wrap;gap:7px;margin:2px 0 14px}.group-tag{background:#e9f2ff;color:#245b92}
 .detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
@@ -625,7 +627,7 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
     var photoUrls = (Array.isArray(p.image_urls) && p.image_urls.length ? p.image_urls : (p.image_url ? [p.image_url] : [])).map(safeUrl).filter(Boolean);
     var img = photoUrls[0] || safeUrl(p.image_url) || placeholder;
     galleryIndex = 0;
-    var gallery = photoUrls.length > 1 ? '<div class="product-gallery" id="productGallery"><div class="gallery-frame"><button type="button" class="gallery-arrow gallery-prev" data-gallery-prev aria-label="عکس قبلی">‹</button><img id="galleryMainImage" src="' + escapeHtml(photoUrls[0]) + '" alt="' + escapeHtml(p.name) + '"><button type="button" class="gallery-arrow gallery-next" data-gallery-next aria-label="عکس بعدی">›</button></div><div class="gallery-dots">' + photoUrls.map(function(url,idx){return '<button type="button" class="gallery-dot' + (idx===0?' active':'') + '" data-gallery-index="' + idx + '" aria-label="نمایش عکس ' + (idx+1) + '"></button>';}).join('') + '</div><div class="gallery-count"><span id="galleryCurrent">1</span> / ' + photoUrls.length + '</div></div>' : '';
+    var gallery = photoUrls.length > 1 ? '<div class="product-gallery" id="productGallery"><div class="gallery-frame" id="gallerySwipeArea"><button type="button" class="gallery-arrow gallery-prev" data-gallery-prev aria-label="عکس قبلی">‹</button><img id="galleryMainImage" src="' + escapeHtml(photoUrls[0]) + '" alt="' + escapeHtml(p.name) + '"><button type="button" class="gallery-arrow gallery-next" data-gallery-next aria-label="عکس بعدی">›</button></div><div class="gallery-dots">' + photoUrls.map(function(url,idx){return '<button type="button" class="gallery-dot' + (idx===0?' active':'') + '" data-gallery-index="' + idx + '" aria-label="نمایش عکس ' + (idx+1) + '"></button>';}).join('') + '</div><div class="gallery-meta"><span class="gallery-count"><span id="galleryCurrent">1</span> از ' + photoUrls.length + ' عکس</span><span class="gallery-swipe-hint"><span>↔</span> برای دیدن عکس بعدی بکشید</span></div></div>' : '';
     if (galleryTimer) { clearInterval(galleryTimer); galleryTimer = null; }
     var cars = (p.suitable_cars || '').trim();
     var group = (p.product_group || '').trim();
@@ -651,6 +653,31 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
         if (e.target.closest('[data-gallery-prev]')) { setGalleryImage(galleryIndex - 1); }
         else if (e.target.closest('[data-gallery-next]')) { setGalleryImage(galleryIndex + 1); }
         else { var dot = e.target.closest('[data-gallery-index]'); if (dot) setGalleryImage(Number(dot.getAttribute('data-gallery-index'))); }
+      });
+      // Touch-friendly horizontal swipe, like a modern shopping app.
+      var swipeArea = $('gallerySwipeArea');
+      var touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+      swipeArea.addEventListener('touchstart', function(e) {
+        if (!e.touches || e.touches.length !== 1) return;
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchStartTime = Date.now();
+      }, { passive: true });
+      swipeArea.addEventListener('touchend', function(e) {
+        if (!e.changedTouches || !e.changedTouches.length) return;
+        var dx = e.changedTouches[0].clientX - touchStartX;
+        var dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 42 && Math.abs(dx) > Math.abs(dy) * 1.25 && Date.now() - touchStartTime < 900) {
+          setGalleryImage(galleryIndex + (dx < 0 ? 1 : -1));
+          if (galleryTimer) { clearInterval(galleryTimer); }
+          galleryTimer = setInterval(function() { if ($('galleryMainImage')) setGalleryImage(galleryIndex + 1); else { clearInterval(galleryTimer); galleryTimer = null; } }, 3500);
+        }
+      }, { passive: true });
+      // Support arrow keys while the product dialog is open.
+      $('productGallery').setAttribute('tabindex', '0');
+      $('productGallery').addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowLeft') setGalleryImage(galleryIndex + 1);
+        if (e.key === 'ArrowRight') setGalleryImage(galleryIndex - 1);
       });
       galleryTimer = setInterval(function() { if ($('galleryMainImage')) setGalleryImage(galleryIndex + 1); else { clearInterval(galleryTimer); galleryTimer = null; } }, 3500);
     }
@@ -964,3 +991,4 @@ button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{
 </script>
 </body>
 </html>
+
